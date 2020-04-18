@@ -10,10 +10,10 @@ abstract class UseCase<P : Any, T>(private val dispatcherProvider: DispatcherPro
     abstract suspend fun run(params: P?): Result<T>
 
     operator fun invoke(scope: CoroutineScope, callback: Callback<T>? = null) {
-        scope.launch(dispatcherProvider.background) {
+        scope.launch {
             try {
-                val result = async { run(useCaseParams) }
-                callback?.invoke(result.await())
+                val result = async(dispatcherProvider.background) { run(useCaseParams) }.await()
+                callback?.invoke(result)
             } catch (e: Exception) {
                 Error(e)
             }
