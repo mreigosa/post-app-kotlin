@@ -1,0 +1,20 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    api project(':data')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    implementation "org.koin:koin-android:$koin_version"
+    testImplementation "org.koin:koin-test:$koin_version"
+
+    implementation "com.google.code.gson:gson:${gson_version}"
+    implementation "com.squareup.okhttp3:okhttp:${okhttp_version}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.15.0'
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp_version}"
+}
