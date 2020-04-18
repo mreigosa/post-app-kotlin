@@ -7,7 +7,7 @@ import retrofit2.http.GET
 interface PostApi {
 
     companion object{
-        const val BASE_URL = "http://jsonplaceholder.typicode.com"
+        const val BASE_URL = "https://jsonplaceholder.typicode.com"
     }
 
     @GET("posts")
