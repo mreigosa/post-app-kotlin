@@ -1,2 +1,4 @@
 rootProject.name='Post App'
 include ':app'
+include ':network'
+include ':data'
