@@ -6,7 +6,7 @@ import com.mreigar.network.api.PostApi
 import com.mreigar.network.datasource.PostRemoteDataSourceImpl
 import org.koin.dsl.module
 
-class NetworkModules {
+object NetworkModules {
 
     val networkModule = module {
         single { NetworkApi().provideApi(PostApi.BASE_URL, PostApi::class.java) }
