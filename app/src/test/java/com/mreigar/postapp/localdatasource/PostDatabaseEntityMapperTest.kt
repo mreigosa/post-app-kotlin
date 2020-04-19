@@ -1,20 +1,20 @@
 package com.mreigar.postapp.localdatasource
 
 import com.mreigar.data.model.PostEntity
-import com.mreigar.localstorage.mapper.PostEntityMapper
+import com.mreigar.localstorage.mapper.PostDatabaseEntityMapper
 import com.mreigar.localstorage.model.PostDatabaseEntity
 import instrumentation.data.PostDataInstrument
 import instrumentation.localdatasource.PostDatabaseInstrument
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
-class PostEntityMapperTest {
+class PostDatabaseEntityMapperTest {
 
     @Test
     fun `that can map database data to entity`() {
         val databaseEntity = PostDatabaseInstrument.givenPostDatabaseEntity()
 
-        val mappedInstance: Any = PostEntityMapper().mapFromDatabase(databaseEntity)
+        val mappedInstance: Any = PostDatabaseEntityMapper().mapFromDatabase(databaseEntity)
 
         Assertions.assertThat(mappedInstance is PostEntity).isTrue()
         Assertions.assertThat((mappedInstance as PostEntity).id).isEqualTo(databaseEntity.id)
@@ -27,7 +27,7 @@ class PostEntityMapperTest {
     fun `that can map data entity to database entity`() {
         val dataEntity = PostDataInstrument.givenPostEntity()
 
-        val mappedInstance: Any = PostEntityMapper().mapToDatabase(dataEntity)
+        val mappedInstance: Any = PostDatabaseEntityMapper().mapToDatabase(dataEntity)
 
         Assertions.assertThat(mappedInstance is PostDatabaseEntity).isTrue()
         Assertions.assertThat((mappedInstance as PostDatabaseEntity).id).isEqualTo(dataEntity.id)
