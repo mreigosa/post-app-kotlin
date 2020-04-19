@@ -5,7 +5,7 @@ import com.mreigar.presentation.model.PostViewModel
 
 class PostViewModelMapper : Mapper<Post, PostViewModel> {
 
-    override fun mapToView(type: Post): PostViewModel = with(type) {
+    override fun mapToView(domainEntity: Post): PostViewModel = with(domainEntity) {
         PostViewModel(userId, id, title, body)
     }
 }

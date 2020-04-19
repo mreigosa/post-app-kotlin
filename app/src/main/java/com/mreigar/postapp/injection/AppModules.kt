@@ -2,9 +2,8 @@ package com.mreigar.postapp.injection
 
 import android.app.Activity
 import android.content.Context
-import com.mreigar.data.injection.DataModules
-import com.mreigar.domain.injection.DomainModules
-import com.mreigar.network.injection.NetworkModules
+import com.mreigar.presentation.presenter.PostDetailsPresenter
+import com.mreigar.presentation.presenter.PostDetailsViewTranslator
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
 import org.koin.android.ext.android.inject
@@ -17,5 +16,6 @@ object AppModules {
 
     val presentationModules = module {
         factory { (view: Context) -> PostListPresenter(view as PostListViewTranslator, get()) }
+        factory { (view: Context) -> PostDetailsPresenter(view as PostDetailsViewTranslator, get(), get()) }
     }
 }
