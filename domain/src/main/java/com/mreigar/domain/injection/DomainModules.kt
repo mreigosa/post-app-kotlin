@@ -10,6 +10,6 @@ object DomainModules {
     val useCaseModule = module {
         single<DispatcherProvider> { DispatcherProviderImpl() }
 
-        single { GetPostsUseCase(get()) }
+        single { GetPostsUseCase(get(), get()) }
     }
 }
