@@ -3,7 +3,7 @@ package com.mreigar.postapp.data
 import com.mreigar.data.maper.PostMapper
 import com.mreigar.data.model.PostEntity
 import com.mreigar.domain.model.Post
-import instrumentation.data.PostRepositoryInstrument.givenPostEntity
+import instrumentation.data.PostDataInstrument.givenPostEntity
 import instrumentation.domain.PostDomainInstrument.givenPost
 import org.assertj.core.api.Assertions
 import org.junit.Test

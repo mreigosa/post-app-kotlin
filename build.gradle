@@ -24,6 +24,7 @@ buildscript {
         espresso_version = '3.2.0'
         androidx_test_version = '1.2.0'
         barista_version = '3.4.0'
+        robolectric_version = '4.3.1'
     }
     repositories {
         google()
