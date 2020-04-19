@@ -24,8 +24,8 @@ class PostDetailsPresenter(
 
     private lateinit var post: PostViewModel
 
-    override fun onStart() {
-        super.onStart()
+    override fun onReady() {
+        super.onReady()
         view()?.getPostFromArgs()?.let {
             post = it
             fetchPostDetails()
@@ -43,6 +43,7 @@ class PostDetailsPresenter(
     }
 
     private fun onUserRetrieved(user: User) {
+        view()?.showPostInfo(post)
         view()?.showUserInfo(userMapper.mapToView(user))
         getCommentsByPostUseCase.withParams(post.id).invoke(this) {
             when (it) {
@@ -64,6 +65,7 @@ interface PostDetailsViewTranslator {
     fun showLoader()
     fun hideLoader()
     fun showError()
+    fun showPostInfo(post: PostViewModel)
     fun showUserInfo(user: UserViewModel)
     fun showComments(comments: List<CommentViewModel>)
 }

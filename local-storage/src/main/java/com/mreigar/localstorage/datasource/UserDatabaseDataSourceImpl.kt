@@ -20,4 +20,8 @@ class UserDatabaseDataSourceImpl : UserDatabaseDataSourceContract, KoinComponent
     override fun saveUsers(users: List<UserEntity>) {
         database.userDao().insertUsers(users.map { mapper.mapToDatabase(it) })
     }
+
+    override fun getUserById(userId: Int): UserEntity? {
+        return database.userDao().getById(userId)?.let { mapper.mapFromDatabase(it) }
+    }
 }
