@@ -43,6 +43,7 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
     }
 
     override fun showError() {
+        hideLoader()
         Snackbar.make(findViewById(android.R.id.content), "Error loading posts", Snackbar.LENGTH_LONG).show()
     }
 }

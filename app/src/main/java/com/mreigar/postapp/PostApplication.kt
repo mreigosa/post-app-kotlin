@@ -3,6 +3,7 @@ package com.mreigar.postapp
 import android.app.Application
 import com.mreigar.data.injection.DataModules
 import com.mreigar.domain.injection.DomainModules
+import com.mreigar.localstorage.injection.LocalStorageModules
 import com.mreigar.network.injection.NetworkModules
 import com.mreigar.postapp.injection.AppModules
 import org.koin.android.ext.koin.androidContext
@@ -21,6 +22,7 @@ class PostApplication : Application() {
             androidContext(this@PostApplication)
             modules(
                 NetworkModules.networkModule,
+                LocalStorageModules.databaseModule,
                 DataModules.repositoryModule,
                 DomainModules.useCaseModule,
                 AppModules.presentationModules

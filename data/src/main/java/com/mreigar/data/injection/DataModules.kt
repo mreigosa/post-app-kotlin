@@ -7,7 +7,6 @@ import org.koin.dsl.module
 object DataModules {
 
     val repositoryModule = module {
-        factory<PostRepositoryContract> { PostRepository(get()) }
+        factory<PostRepositoryContract> { PostRepository(get(), get()) }
     }
-
 }

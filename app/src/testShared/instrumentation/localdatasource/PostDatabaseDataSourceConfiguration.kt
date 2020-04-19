@@ -1,9 +1,8 @@
-package instrumentation.remotedatasource
+package instrumentation.localdatasource
 
 import com.mreigar.data.model.PostEntity
 import instrumentation.data.PostDataInstrument.givenPostEntityList
-import java.util.*
 
-data class PostRemoteDataSourceConfiguration(
+data class PostDatabaseDataSourceConfiguration(
     var postEntityList: List<PostEntity> = givenPostEntityList(1)
 )
