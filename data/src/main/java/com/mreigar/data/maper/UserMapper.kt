@@ -5,10 +5,10 @@ import com.mreigar.domain.model.User
 
 class UserMapper : Mapper<UserEntity, User> {
     override fun mapFromEntity(dataEntity: UserEntity): User = with(dataEntity) {
-        User(id, name, username, email, website)
+        User(id, name, username, email)
     }
 
     override fun mapToEntity(domainEntity: User): UserEntity = with(domainEntity) {
-        UserEntity(id, name, username, email, website)
+        UserEntity(id, name, username, email)
     }
 }

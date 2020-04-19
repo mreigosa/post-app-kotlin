@@ -7,7 +7,6 @@ class UserRemoteEntityMapper : Mapper<UserRemoteEntity, UserEntity> {
 
     override fun mapFromRemote(remoteEntity: UserRemoteEntity): UserEntity =
         with(remoteEntity) {
-            UserEntity(id, name, username, email, website)
+            UserEntity(id, name, username, email)
         }
-
 }

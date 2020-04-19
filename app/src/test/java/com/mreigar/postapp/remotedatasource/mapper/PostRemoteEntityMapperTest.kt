@@ -1,16 +1,16 @@
-package com.mreigar.postapp.remotedatasource
+package com.mreigar.postapp.remotedatasource.mapper
 
 import com.mreigar.data.model.PostEntity
 import com.mreigar.network.mapper.PostRemoteEntityMapper
-import instrumentation.remotedatasource.PostRemoteInstrument.givenPostRemoteEntity
+import instrumentation.remotedatasource.RemoteEntityInstrument
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class PostRemoteEntityMapperTest {
 
     @Test
-    fun `that can map a network response to entity`() {
-        val remoteEntity = givenPostRemoteEntity()
+    fun `that can map a remote post entity to data entity`() {
+        val remoteEntity = RemoteEntityInstrument.givenPostRemoteEntity()
 
         val mappedInstance: Any = PostRemoteEntityMapper().mapFromRemote(remoteEntity)
 
@@ -20,4 +20,5 @@ class PostRemoteEntityMapperTest {
         assertThat(mappedInstance.title).isEqualTo(remoteEntity.title)
         assertThat(mappedInstance.body).isEqualTo(remoteEntity.body)
     }
+
 }
