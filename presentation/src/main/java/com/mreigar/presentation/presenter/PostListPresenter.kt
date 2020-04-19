@@ -20,6 +20,7 @@ class PostListPresenter(
     }
 
     private fun fetchPosts() {
+        view()?.showLoader()
         getPostsUseCase.invoke(this) { result ->
             when (result) {
                 is Success -> view()?.showData(result.data.map { mapper.mapToView(it) })
