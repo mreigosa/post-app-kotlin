@@ -16,5 +16,4 @@ class PostRemoteDataSourceImpl(private val api: PostApi) : PostRemoteDataSourceC
             it.map { postRemoteEntity -> mapper.mapFromRemote(postRemoteEntity) }
         } ?: throw Exception()
     }
-
 }
