@@ -5,7 +5,7 @@ import kotlinx.coroutines.*
 
 abstract class UseCase<P : Any, T>(private val dispatcherProvider: DispatcherProvider) {
 
-    protected var useCaseParams: P? = null
+    private var useCaseParams: P? = null
 
     abstract suspend fun run(params: P?): Result<T>
 

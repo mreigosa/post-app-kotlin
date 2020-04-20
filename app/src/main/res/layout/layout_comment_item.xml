@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_regular">
+
+    <TextView
+        android:id="@+id/itemCommentEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="comment title" />
+
+    <TextView
+        android:id="@+id/itemCommentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_below="@id/itemCommentEmail"
+        tools:text="comment title" />
+
+    <TextView
+        android:id="@+id/itemCommentMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemCommentTitle"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        tools:text="comment message goes here" />
+</RelativeLayout>

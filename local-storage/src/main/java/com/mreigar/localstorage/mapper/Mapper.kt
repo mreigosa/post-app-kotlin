@@ -1,6 +1,6 @@
 package com.mreigar.localstorage.mapper
 
 interface Mapper<M, E> {
-    fun mapFromDatabase(type: M): E
-    fun mapToDatabase(type: E): M
+    fun mapFromDatabase(databaseEntity: M): E
+    fun mapToDatabase(dataEntity: E): M
 }

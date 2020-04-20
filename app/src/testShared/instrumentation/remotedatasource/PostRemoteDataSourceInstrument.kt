@@ -1,6 +1,7 @@
 package instrumentation.remotedatasource
 
 import com.mreigar.data.datasource.PostRemoteDataSourceContract
+import com.mreigar.data.model.CommentEntity
 import com.mreigar.data.model.PostEntity
 
 enum class PostDataSourceStatus {
@@ -16,6 +17,12 @@ object PostRemoteDataSourceInstrument {
         override fun getPosts(): List<PostEntity> =
             when (status) {
                 PostDataSourceStatus.SUCCESS -> configuration.postEntityList
+                PostDataSourceStatus.ERROR -> throw Exception()
+            }
+
+        override fun getComments(): List<CommentEntity> =
+            when (status) {
+                PostDataSourceStatus.SUCCESS -> configuration.commentEntityList
                 PostDataSourceStatus.ERROR -> throw Exception()
             }
     }

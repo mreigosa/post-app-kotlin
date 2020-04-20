@@ -19,7 +19,7 @@ class PostListPresenterTest : AutoCloseKoinTest() {
         val listSize = 5
         presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, true, givenPostList(listSize))
 
-        presenter.onStart()
+        presenter.onReady()
 
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_LOADER)).isTrue()
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_DATA) {
@@ -31,7 +31,7 @@ class PostListPresenterTest : AutoCloseKoinTest() {
     fun `given post list presenter, when data is not retrieved, then error is shown`() {
         presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, false)
 
-        presenter.onStart()
+        presenter.onReady()
 
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_LOADER)).isTrue()
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_DATA)).isFalse()

@@ -1,8 +1,8 @@
-package com.mreigar.postapp.remotedatasource
+package com.mreigar.postapp.remotedatasource.datasource
 
 import com.mreigar.network.api.NetworkApi
 import com.mreigar.network.api.PostApi
-import com.mreigar.network.datasource.PostRemoteDataSourceImpl
+import com.mreigar.network.datasource.UserRemoteDataSourceImpl
 import com.mreigar.postapp.remotedatasource.mock.MockServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -12,7 +12,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import org.koin.test.AutoCloseKoinTest
 
-class PostRemoteDataSourceImplTest : AutoCloseKoinTest() {
+class UserRemoteDataSourceImplTest : AutoCloseKoinTest() {
 
     private lateinit var mockServer: MockServer
 
@@ -44,17 +44,17 @@ class PostRemoteDataSourceImplTest : AutoCloseKoinTest() {
     }
 
     @Test
-    fun `given success response, posts are retrieved`() {
-        mockServer.enqueueFile("getPosts.json")
-        val response = PostRemoteDataSourceImpl(postApi).getPosts()
+    fun `given success response, users are retrieved`() {
+        mockServer.enqueueFile("getUsers.json")
+        val response = UserRemoteDataSourceImpl(postApi).getUsers()
 
         assertThat(response).isNotNull
         assertThat(response).isNotEmpty
     }
 
     @Test(expected = Exception::class)
-    fun `that cannot fetch  posts`() {
+    fun `that cannot fetch  comments`() {
         mockServer.enqueue(500)
-        PostRemoteDataSourceImpl(postApi).getPosts()
+        UserRemoteDataSourceImpl(postApi).getUsers()
     }
 }

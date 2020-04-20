@@ -5,11 +5,11 @@ import com.mreigar.domain.model.Post
 
 class PostMapper : Mapper<PostEntity, Post> {
 
-    override fun mapFromEntity(type: PostEntity): Post = with(type) {
+    override fun mapFromEntity(dataEntity: PostEntity): Post = with(dataEntity) {
         Post(userId, id, title, body)
     }
 
-    override fun mapToEntity(type: Post): PostEntity = with(type) {
+    override fun mapToEntity(domainEntity: Post): PostEntity = with(domainEntity) {
         PostEntity(userId, id, title, body)
     }
 }
