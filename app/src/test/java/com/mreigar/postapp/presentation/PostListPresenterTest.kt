@@ -1,7 +1,7 @@
 package com.mreigar.postapp.presentation
 
 import com.mreigar.presentation.presenter.PostListPresenter
-import instrumentation.domain.PostDomainInstrument.givenPostList
+import instrumentation.domain.DomainEntityInstrument.givenPostUserList
 import instrumentation.presentation.PostListCallbackResult
 import instrumentation.presentation.PostListPresenterInstrument
 import instrumentation.presentation.PostListViewMethod
@@ -17,7 +17,7 @@ class PostListPresenterTest : AutoCloseKoinTest() {
     @Test
     fun `given post list presenter, when data is retrieved, then is shown`() {
         val listSize = 5
-        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, true, givenPostList(listSize))
+        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, postUserList = givenPostUserList(listSize))
 
         presenter.onReady()
 
@@ -29,7 +29,7 @@ class PostListPresenterTest : AutoCloseKoinTest() {
 
     @Test
     fun `given post list presenter, when data is not retrieved, then error is shown`() {
-        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, false)
+        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, refreshPostsIsSuccess = false)
 
         presenter.onReady()
 

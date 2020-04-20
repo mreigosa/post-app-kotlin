@@ -1,27 +1,29 @@
 package instrumentation.presentation
 
-import com.mreigar.domain.model.Post
+import com.mreigar.domain.model.PostUser
 import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
-import instrumentation.data.PostRepositoryStatus
-import instrumentation.domain.GetPostsUseCaseInstrument
+import instrumentation.data.RepositoryStatus
+import instrumentation.domain.GetPostsUsersUseCaseInstrument
 
 object PostListPresenterInstrument {
 
     fun givenPostListPresenter(
         callbackResult: PostListCallbackResult,
-        getPostsIsSuccess: Boolean = true,
-        postList: List<Post>? = null
+        refreshPostsIsSuccess: Boolean = true,
+        refreshUserIsSuccess: Boolean = true,
+        postUserList: List<PostUser>? = null
     ) = PostListPresenter(
         givenPostListViewTranslator(callbackResult),
-        givenGetPostsUseCase(getPostsIsSuccess, postList)
+        givenGetPostsUsersUseCase(refreshPostsIsSuccess, refreshUserIsSuccess, postUserList)
     )
 
-    private fun givenGetPostsUseCase(getPostsIsSuccess: Boolean, postList: List<Post>?) =
-        GetPostsUseCaseInstrument.givenGetPostsUseCase(
-            repositoryStatus = if (getPostsIsSuccess) PostRepositoryStatus.SUCCESS else PostRepositoryStatus.ERROR,
-            postList = postList
+    private fun givenGetPostsUsersUseCase(refreshPostsIsSuccess: Boolean, refreshUserIsSuccess: Boolean, postUserList: List<PostUser>?) =
+        GetPostsUsersUseCaseInstrument.givenGetPostsUsersUseCase(
+            postRepositoryStatus = if (refreshPostsIsSuccess) RepositoryStatus.SUCCESS else RepositoryStatus.ERROR,
+            userRepositoryStatus = if (refreshUserIsSuccess) RepositoryStatus.SUCCESS else RepositoryStatus.ERROR,
+            postUserList = postUserList
         )
 
     private fun givenPostListViewTranslator(callbackResult: PostListCallbackResult) = object : PostListViewTranslator {

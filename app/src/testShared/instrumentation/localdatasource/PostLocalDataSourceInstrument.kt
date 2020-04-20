@@ -3,6 +3,7 @@ package instrumentation.localdatasource
 import com.mreigar.data.datasource.PostDatabaseDataSourceContract
 import com.mreigar.data.model.CommentEntity
 import com.mreigar.data.model.PostEntity
+import com.mreigar.data.model.PostUserEntity
 
 enum class PostLocalDataSourceStatus {
     SUCCESS, ERROR
@@ -29,5 +30,11 @@ object PostLocalDataSourceInstrument {
             }
 
         override fun saveComments(comments: List<CommentEntity>) = Unit
+
+        override fun getPostsUsers(): List<PostUserEntity> =
+            when (status) {
+                PostLocalDataSourceStatus.SUCCESS -> configuration.postUserEntityList
+                PostLocalDataSourceStatus.ERROR -> throw Exception()
+            }
     }
 }

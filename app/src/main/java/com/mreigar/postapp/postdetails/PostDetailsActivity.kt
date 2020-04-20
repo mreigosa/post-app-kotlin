@@ -14,7 +14,6 @@ import com.mreigar.postapp.extension.visible
 import com.mreigar.postapp.injection.injectActivity
 import com.mreigar.presentation.model.CommentViewModel
 import com.mreigar.presentation.model.PostViewModel
-import com.mreigar.presentation.model.UserViewModel
 import com.mreigar.presentation.presenter.PostDetailsPresenter
 import com.mreigar.presentation.presenter.PostDetailsViewTranslator
 import kotlinx.android.synthetic.main.activity_post_details.*
@@ -65,11 +64,8 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
 
     override fun showPostInfo(post: PostViewModel) {
         postDetailsBody.text = post.body
-    }
-
-    override fun showUserInfo(user: UserViewModel) {
-        postDetailsUserName.text = user.name
-        postDetailsUserUsername.text = user.username
+        postDetailsUserName.text = post.userName
+        postDetailsUserUsername.text = post.userUsername
     }
 
     override fun showComments(comments: List<CommentViewModel>) {

@@ -16,6 +16,24 @@ class UserRepository(
 
     private val mapper: UserMapper = UserMapper()
 
+    override fun getUsers(): Result<List<User>> = getUsersFromRemote()
+
+    private fun getUsersFromRemote() =
+        try {
+            val remoteResponse = remoteDataSource.getUsers()
+            databaseDataSource.saveUsers(remoteResponse)
+            Success(remoteResponse.map { mapper.mapFromEntity(it) })
+        } catch (e: Exception) {
+            getUsersFromLocal()
+        }
+
+    private fun getUsersFromLocal(): Result<List<User>> {
+        val databaseResult = databaseDataSource.getUsers()
+        return if (databaseResult.isNotEmpty()) {
+            Success(databaseResult.map { mapper.mapFromEntity(it) })
+        } else NoData
+    }
+
     override fun getUserById(userId: Int): Result<User> =
         try {
             val databaseResult = getUserByIdFromLocal(userId)

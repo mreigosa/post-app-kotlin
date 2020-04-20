@@ -1,10 +1,8 @@
 package com.mreigar.localstorage.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.mreigar.localstorage.model.PostDatabaseEntity
+import com.mreigar.localstorage.model.PostUserDatabaseEntity
 
 @Dao
 interface PostDao {
@@ -16,4 +14,8 @@ interface PostDao {
 
     @Query("SELECT * FROM PostDatabaseEntity")
     fun getAllPosts(): List<PostDatabaseEntity>
+
+    @Transaction
+    @Query("SELECT * FROM PostDatabaseEntity")
+    fun getAllPostsAndUsers(): List<PostUserDatabaseEntity>
 }
