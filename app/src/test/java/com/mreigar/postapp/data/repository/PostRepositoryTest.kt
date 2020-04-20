@@ -1,4 +1,4 @@
-package com.mreigar.postapp.data
+package com.mreigar.postapp.data.repository
 
 import com.mreigar.data.repository.PostRepository
 import com.mreigar.domain.executor.Error

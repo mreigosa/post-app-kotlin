@@ -1,18 +1,18 @@
-package com.mreigar.postapp.localdatasource
+package com.mreigar.postapp.localdatasource.mapper
 
 import com.mreigar.data.model.PostEntity
 import com.mreigar.localstorage.mapper.PostDatabaseEntityMapper
 import com.mreigar.localstorage.model.PostDatabaseEntity
-import instrumentation.data.PostDataInstrument
-import instrumentation.localdatasource.PostDatabaseInstrument
+import instrumentation.data.DataEntityInstrument
+import instrumentation.localdatasource.DatabaseEntityInstrument
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
 class PostDatabaseEntityMapperTest {
 
     @Test
-    fun `that can map database data to entity`() {
-        val databaseEntity = PostDatabaseInstrument.givenPostDatabaseEntity()
+    fun `that can map post from database entity`() {
+        val databaseEntity = DatabaseEntityInstrument.givenPostDatabaseEntity()
 
         val mappedInstance: Any = PostDatabaseEntityMapper().mapFromDatabase(databaseEntity)
 
@@ -24,8 +24,8 @@ class PostDatabaseEntityMapperTest {
     }
 
     @Test
-    fun `that can map data entity to database entity`() {
-        val dataEntity = PostDataInstrument.givenPostEntity()
+    fun `that can map post to database entity`() {
+        val dataEntity = DataEntityInstrument.givenPostEntity()
 
         val mappedInstance: Any = PostDatabaseEntityMapper().mapToDatabase(dataEntity)
 

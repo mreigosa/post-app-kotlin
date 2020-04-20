@@ -1,9 +1,9 @@
-package com.mreigar.postapp.data
+package com.mreigar.postapp.data.mapper
 
 import com.mreigar.data.maper.PostMapper
 import com.mreigar.data.model.PostEntity
 import com.mreigar.domain.model.Post
-import instrumentation.data.PostDataInstrument.givenPostEntity
+import instrumentation.data.DataEntityInstrument
 import instrumentation.domain.PostDomainInstrument.givenPost
 import org.assertj.core.api.Assertions
 import org.junit.Test
@@ -12,7 +12,7 @@ class PostMapperTest {
 
     @Test
     fun `given a data entity, map to domain is correct`() {
-        val dataEntity = givenPostEntity()
+        val dataEntity = DataEntityInstrument.givenPostEntity()
 
         val mappedInstance: Any = PostMapper().mapFromEntity(dataEntity)
 
