@@ -4,7 +4,7 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.mreigar.localstorage.database.AppDatabase
 import com.mreigar.localstorage.datasource.PostDatabaseDataSourceImpl
-import com.mreigar.postapp.PostRobolectricTestRunner
+import com.mreigar.postapp.AppRobolectricTestRunner
 import instrumentation.data.DataEntityInstrument
 import instrumentation.data.DataEntityInstrument.givenCommentEntity
 import instrumentation.localdatasource.DatabaseEntityInstrument
@@ -13,7 +13,7 @@ import org.junit.Test
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class PostDatabaseDataSourceImplTest : PostRobolectricTestRunner() {
+class PostDatabaseDataSourceImplTest : AppRobolectricTestRunner() {
 
     private lateinit var database: AppDatabase
 

@@ -12,7 +12,7 @@ class MockApplication : Application()
 
 @RunWith(RobolectricTestRunner::class)
 @Config(application = MockApplication::class)
-abstract class PostRobolectricTestRunner : AutoCloseKoinTest() {
+abstract class AppRobolectricTestRunner : AutoCloseKoinTest() {
     @Before
     open fun before() {
     }

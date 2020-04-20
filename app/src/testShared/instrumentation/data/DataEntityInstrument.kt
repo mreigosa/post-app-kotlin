@@ -11,7 +11,7 @@ object DataEntityInstrument {
 
     fun givenCommentEntity(id: Int = 1, postId: Int = 1) = CommentEntity(id, postId, "name", "name@mail.com", "body")
 
-    fun givenUserEntity() = UserEntity(1, "name", "username", "name@mail.com")
+    fun givenUserEntity(userId: Int = 1) = UserEntity(userId, "name", "username", "name@mail.com")
 
     fun givenPostEntityList(size: Int): List<PostEntity> {
         val list: MutableList<PostEntity> = LinkedList<PostEntity>()
