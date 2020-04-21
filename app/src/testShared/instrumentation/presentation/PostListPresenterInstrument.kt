@@ -4,8 +4,8 @@ import com.mreigar.domain.model.Post
 import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
-import instrumentation.data.PostRepositoryStatus
-import instrumentation.domain.GetPostsUseCaseInstrument
+import instrumentation.data.RepositoryStatus
+import instrumentation.domain.usecase.GetPostsUseCaseInstrument
 
 object PostListPresenterInstrument {
 
@@ -20,7 +20,7 @@ object PostListPresenterInstrument {
 
     private fun givenGetPostsUseCase(getPostsIsSuccess: Boolean, postList: List<Post>?) =
         GetPostsUseCaseInstrument.givenGetPostsUseCase(
-            repositoryStatus = if (getPostsIsSuccess) PostRepositoryStatus.SUCCESS else PostRepositoryStatus.ERROR,
+            repositoryStatus = if (getPostsIsSuccess) RepositoryStatus.SUCCESS else RepositoryStatus.ERROR,
             postList = postList
         )
 

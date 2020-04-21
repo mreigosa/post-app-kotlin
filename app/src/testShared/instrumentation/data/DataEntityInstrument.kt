@@ -30,4 +30,13 @@ object DataEntityInstrument {
 
         return list
     }
+
+    fun givenUserEntityList(size: Int): List<UserEntity> {
+        val list: MutableList<UserEntity> = LinkedList<UserEntity>()
+        for (i in 0 until size) {
+            list.add(UserEntity(i, "name$i", "username$i", "name@mail.com"))
+        }
+
+        return list
+    }
 }

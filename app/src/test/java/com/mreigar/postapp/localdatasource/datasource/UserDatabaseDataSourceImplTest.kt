@@ -33,7 +33,7 @@ class UserDatabaseDataSourceImplTest : AppRobolectricTestRunner() {
     }
 
     @Test
-    fun `user entity can be retrieved from database`() {
+    fun `user entity can be retrieved by id from database`() {
         val databaseEntity = DatabaseEntityInstrument.givenUserDatabaseEntity()
 
         database.userDao().insertUser(databaseEntity)
@@ -44,6 +44,16 @@ class UserDatabaseDataSourceImplTest : AppRobolectricTestRunner() {
         Assertions.assertThat(user.name).isEqualTo(databaseEntity.name)
         Assertions.assertThat(user.username).isEqualTo(databaseEntity.username)
         Assertions.assertThat(user.email).isEqualTo(databaseEntity.email)
+    }
+
+    @Test
+    fun `user entity cannot be retrieved by id from database`() {
+        val databaseEntity = DatabaseEntityInstrument.givenUserDatabaseEntity()
+
+        database.userDao().insertUser(databaseEntity)
+
+        val user = UserDatabaseDataSourceImpl().getUserById(userId = 2)
+        Assertions.assertThat(user).isNull()
     }
 
     @Test
