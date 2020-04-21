@@ -62,7 +62,7 @@ class PostRepositoryTest {
         val repository = PostRepository(
             PostRemoteDataSourceInstrument.givenPostRemoteDataSource(
                 configuration = PostRemoteDataSourceConfiguration(
-                    commentEntityList = listOf(givenCommentEntity(postId = 1), givenCommentEntity(postId = 1))
+                    commentEntityList = listOf(givenCommentEntity(id = 1, postId = 1), givenCommentEntity(id = 2, postId = 1))
                 )
             ),
             PostDatabaseDataSourceInstrument.givenPostDatabaseDataSource()
