@@ -12,7 +12,7 @@ class PostDatabaseEntityMapperTest {
 
     @Test
     fun `that can map post from database entity`() {
-        val databaseEntity = DatabaseEntityInstrument.givenPostDatabaseEntity()
+        val databaseEntity = DatabaseEntityInstrument.givenPostDatabaseEntity(id = 1, userId = 2)
 
         val mappedInstance: Any = PostDatabaseEntityMapper().mapFromDatabase(databaseEntity)
 

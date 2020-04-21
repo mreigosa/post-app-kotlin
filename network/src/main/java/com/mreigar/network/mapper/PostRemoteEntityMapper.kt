@@ -7,6 +7,6 @@ class PostRemoteEntityMapper : Mapper<PostRemoteEntity, PostEntity> {
 
     override fun mapFromRemote(remoteEntity: PostRemoteEntity): PostEntity =
         with(remoteEntity) {
-            PostEntity(userId, id, title, body)
+            PostEntity(id = id, userId = userId, title = title, body = body)
         }
 }

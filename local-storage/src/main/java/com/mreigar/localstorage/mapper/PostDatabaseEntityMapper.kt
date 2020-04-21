@@ -6,11 +6,11 @@ import com.mreigar.localstorage.model.PostDatabaseEntity
 class PostDatabaseEntityMapper : Mapper<PostDatabaseEntity, PostEntity> {
     override fun mapFromDatabase(databaseEntity: PostDatabaseEntity): PostEntity =
         with(databaseEntity) {
-            PostEntity(id, userId, title, body)
+            PostEntity(id = id, userId = userId, title = title, body = body)
         }
 
     override fun mapToDatabase(dataEntity: PostEntity): PostDatabaseEntity =
         with(dataEntity) {
-            PostDatabaseEntity(id, userId, title, body)
+            PostDatabaseEntity(id = id, userId = userId, title = title, body = body)
         }
 }

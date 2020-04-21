@@ -6,10 +6,10 @@ import com.mreigar.localstorage.model.CommentDatabaseEntity
 class CommentDatabaseEntityMapper : Mapper<CommentDatabaseEntity, CommentEntity> {
     override fun mapFromDatabase(databaseEntity: CommentDatabaseEntity): CommentEntity =
         with(databaseEntity) {
-            CommentEntity(id, postId, name, email, body)
+            CommentEntity(id = id, postId = postId, name = name, email = email, body = body)
         }
 
     override fun mapToDatabase(dataEntity: CommentEntity): CommentDatabaseEntity = with(dataEntity) {
-        CommentDatabaseEntity(id, postId, name, email, body)
+        CommentDatabaseEntity(id = id, postId = postId, name = name, email = email, body = body)
     }
 }

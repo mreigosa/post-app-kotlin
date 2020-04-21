@@ -7,7 +7,7 @@ import java.util.*
 
 object DataEntityInstrument {
 
-    fun givenPostEntity() = PostEntity(1, 1, "title", "body")
+    fun givenPostEntity(id: Int = 1, userId: Int = 1) = PostEntity(id = id, userId = userId, title = "title", body = "body")
 
     fun givenCommentEntity(id: Int = 1, postId: Int = 1) = CommentEntity(id, postId, "name", "name@mail.com", "body")
 
