@@ -38,7 +38,7 @@ class PostRepository(
         try {
             val remoteResponse = remoteDataSource.getComments()
             databaseDataSource.saveComments(remoteResponse)
-            val commentsById = remoteResponse.filter { it.id == postId }
+            val commentsById = remoteResponse.filter { it.postId == postId }
             if (commentsById.isEmpty()) NoData else Success(commentsById.map { commentMapper.mapFromEntity(it) }, DataStatus.REMOTE)
         } catch (e: Exception) {
             getCommentByIdFromLocal(postId)
