@@ -4,26 +4,22 @@ import com.mreigar.data.datasource.PostRemoteDataSourceContract
 import com.mreigar.data.model.CommentEntity
 import com.mreigar.data.model.PostEntity
 
-enum class PostDataSourceStatus {
-    SUCCESS, ERROR
-}
-
 object PostRemoteDataSourceInstrument {
 
     fun givenPostRemoteDataSource(
-        status: PostDataSourceStatus = PostDataSourceStatus.SUCCESS,
+        status: RemoteDataSourceStatus = RemoteDataSourceStatus.SUCCESS,
         configuration: PostRemoteDataSourceConfiguration = PostRemoteDataSourceConfiguration()
     ): PostRemoteDataSourceContract = object : PostRemoteDataSourceContract {
         override fun getPosts(): List<PostEntity> =
             when (status) {
-                PostDataSourceStatus.SUCCESS -> configuration.postEntityList
-                PostDataSourceStatus.ERROR -> throw Exception()
+                RemoteDataSourceStatus.SUCCESS -> configuration.postEntityList
+                RemoteDataSourceStatus.ERROR -> throw Exception()
             }
 
         override fun getComments(): List<CommentEntity> =
             when (status) {
-                PostDataSourceStatus.SUCCESS -> configuration.commentEntityList
-                PostDataSourceStatus.ERROR -> throw Exception()
+                RemoteDataSourceStatus.SUCCESS -> configuration.commentEntityList
+                RemoteDataSourceStatus.ERROR -> throw Exception()
             }
     }
 

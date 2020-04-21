@@ -12,10 +12,6 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
 
     private var items: MutableList<CommentViewModel> = mutableListOf()
 
-    init {
-        setHasStableIds(true)
-    }
-
     fun setComments(comments: List<CommentViewModel>) {
         items.apply {
             clear()

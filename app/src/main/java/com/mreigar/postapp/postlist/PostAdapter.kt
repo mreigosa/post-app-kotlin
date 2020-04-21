@@ -14,10 +14,6 @@ class PostAdapter(
 
     private var items: MutableList<PostViewModel> = mutableListOf()
 
-    init {
-        setHasStableIds(true)
-    }
-
     fun setPosts(posts: List<PostViewModel>) {
         items.apply {
             clear()

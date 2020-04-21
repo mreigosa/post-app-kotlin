@@ -2,11 +2,14 @@ package instrumentation.domain
 
 import com.mreigar.domain.model.Comment
 import com.mreigar.domain.model.Post
+import com.mreigar.domain.model.User
 import java.util.*
 
-object PostDomainInstrument {
+object DomainEntityInstrument {
 
     fun givenPost() = Post(1, 1, "title", "body")
+
+    fun givenUser(userId: Int = 1) = User(userId, "name", "username", "name@mail.com")
 
     fun givenPostList(size: Int): List<Post> {
         val list: MutableList<Post> = LinkedList<Post>()

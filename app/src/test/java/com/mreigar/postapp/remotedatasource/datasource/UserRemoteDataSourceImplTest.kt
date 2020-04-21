@@ -53,6 +53,12 @@ class UserRemoteDataSourceImplTest : AutoCloseKoinTest() {
     }
 
     @Test(expected = Exception::class)
+    fun `given success response, user is not retrieved`() {
+        mockServer.enqueue(200, "null")
+        UserRemoteDataSourceImpl(postApi).getUsers()
+    }
+
+    @Test(expected = Exception::class)
     fun `that cannot fetch  comments`() {
         mockServer.enqueue(500)
         UserRemoteDataSourceImpl(postApi).getUsers()

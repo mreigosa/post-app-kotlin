@@ -10,7 +10,7 @@ class PostRemoteEntityMapperTest {
 
     @Test
     fun `that can map a remote post entity to data entity`() {
-        val remoteEntity = RemoteEntityInstrument.givenPostRemoteEntity()
+        val remoteEntity = RemoteEntityInstrument.givenPostRemoteEntity(id = 1, userId = 2)
 
         val mappedInstance: Any = PostRemoteEntityMapper().mapFromRemote(remoteEntity)
 

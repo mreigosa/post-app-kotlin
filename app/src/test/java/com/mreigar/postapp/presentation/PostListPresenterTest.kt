@@ -1,10 +1,12 @@
 package com.mreigar.postapp.presentation
 
+import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
-import instrumentation.domain.PostDomainInstrument.givenPostList
+import instrumentation.domain.DomainEntityInstrument.givenPostList
 import instrumentation.presentation.PostListCallbackResult
 import instrumentation.presentation.PostListPresenterInstrument
 import instrumentation.presentation.PostListViewMethod
+import instrumentation.presentation.PresentationEntityInstrument.givenPostViewModel
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.koin.test.AutoCloseKoinTest
@@ -36,6 +38,18 @@ class PostListPresenterTest : AutoCloseKoinTest() {
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_LOADER)).isTrue()
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_DATA)).isFalse()
         assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_ERROR)).isTrue()
+    }
+
+    @Test
+    fun `given post list presenter, when post clicked, details are shown`() {
+        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult)
+
+        val post = givenPostViewModel()
+        presenter.onPostClicked(post)
+
+        assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_POST_DETAILS) {
+            (params as PostViewModel).id == post.id
+        }).isTrue()
     }
 
 }

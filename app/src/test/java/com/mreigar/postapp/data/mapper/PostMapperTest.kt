@@ -4,7 +4,7 @@ import com.mreigar.data.maper.PostMapper
 import com.mreigar.data.model.PostEntity
 import com.mreigar.domain.model.Post
 import instrumentation.data.DataEntityInstrument
-import instrumentation.domain.PostDomainInstrument.givenPost
+import instrumentation.domain.DomainEntityInstrument.givenPost
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
