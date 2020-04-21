@@ -4,10 +4,10 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class PostUserDatabaseEntity(
-    @Embedded val post: PostDatabaseEntity,
+    @Embedded val user: UserDatabaseEntity,
     @Relation(
-        parentColumn = "user_id",
-        entityColumn = "id"
+        parentColumn = "id",
+        entityColumn = "user_id"
     )
-    val user: UserDatabaseEntity
+    val post: PostDatabaseEntity
 )

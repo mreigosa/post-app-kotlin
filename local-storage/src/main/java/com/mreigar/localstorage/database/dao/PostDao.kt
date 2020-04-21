@@ -16,6 +16,6 @@ interface PostDao {
     fun getAllPosts(): List<PostDatabaseEntity>
 
     @Transaction
-    @Query("SELECT * FROM PostDatabaseEntity")
+    @Query("SELECT * FROM UserDatabaseEntity")
     fun getAllPostsAndUsers(): List<PostUserDatabaseEntity>
 }
