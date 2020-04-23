@@ -5,5 +5,6 @@ data class Comment(
     val postId: Int,
     val name: String,
     val email: String,
-    val body: String
+    val body: String,
+    val details: CommentDetails?
 )
