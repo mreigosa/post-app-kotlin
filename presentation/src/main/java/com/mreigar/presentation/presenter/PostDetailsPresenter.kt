@@ -3,6 +3,7 @@ package com.mreigar.presentation.presenter
 import com.mreigar.domain.executor.Success
 import com.mreigar.domain.executor.usecase.GetCommentsByPostUseCase
 import com.mreigar.domain.executor.usecase.GetUserByPostUseCase
+import com.mreigar.domain.executor.usecase.params.GetCommentsByPostUseCaseParams
 import com.mreigar.domain.model.Comment
 import com.mreigar.domain.model.User
 import com.mreigar.presentation.BasePresenter
@@ -34,7 +35,7 @@ class PostDetailsPresenter(
 
     private fun fetchPostDetails() {
         view()?.showLoader()
-        getUserByPostUseCase.withParams(post.id).invoke(this) {
+        getUserByPostUseCase.withParams(post.userId).invoke(this) {
             when (it) {
                 is Success -> onUserRetrieved(it.data)
                 else -> view()?.showError()
@@ -45,12 +46,14 @@ class PostDetailsPresenter(
     private fun onUserRetrieved(user: User) {
         view()?.showPostInfo(post)
         view()?.showUserInfo(userMapper.mapToView(user))
-        getCommentsByPostUseCase.withParams(post.id).invoke(this) {
-            when (it) {
-                is Success -> onCommentsRetrieved(it.data)
-                else -> view()?.showError()
+        getCommentsByPostUseCase
+            .withParams(GetCommentsByPostUseCaseParams(post.id, true))
+            .invoke(this) {
+                when (it) {
+                    is Success -> onCommentsRetrieved(it.data)
+                    else -> view()?.showError()
+                }
             }
-        }
     }
 
     private fun onCommentsRetrieved(comments: List<Comment>) {

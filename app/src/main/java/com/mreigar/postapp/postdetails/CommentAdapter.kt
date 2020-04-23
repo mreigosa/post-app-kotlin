@@ -34,7 +34,7 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
 
     class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(comment: CommentViewModel) = with(itemView) {
-            itemCommentEmail.text = comment.email
+            itemCommentEmail.text = "${comment.email} ${comment.emailEmojis}"
             itemCommentTitle.text = comment.name
             itemCommentMessage.text = comment.body
         }
