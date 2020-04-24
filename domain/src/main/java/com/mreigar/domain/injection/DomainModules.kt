@@ -14,6 +14,6 @@ object DomainModules {
 
         single { GetPostsUseCase(get(), get()) }
         single { GetUserByPostUseCase(get(), get()) }
-        single { GetCommentsByPostUseCase(get(), get()) }
+        single { GetCommentsByPostUseCase(get(), get(), get()) }
     }
 }

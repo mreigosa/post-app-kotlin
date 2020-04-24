@@ -5,7 +5,7 @@ import com.mreigar.domain.model.Comment
 
 class CommentMapper : Mapper<CommentEntity, Comment> {
     override fun mapFromEntity(dataEntity: CommentEntity): Comment = with(dataEntity) {
-        Comment(id, postId, name, email, body)
+        Comment(id, postId, name, email, body, null)
     }
 
     override fun mapToEntity(domainEntity: Comment): CommentEntity = with(domainEntity) {

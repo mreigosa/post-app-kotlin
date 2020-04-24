@@ -1,8 +1,10 @@
 package instrumentation.data
 
 import com.mreigar.data.model.CommentEntity
+import com.mreigar.data.model.EmailEmojiEntity
 import com.mreigar.data.model.PostEntity
 import com.mreigar.data.model.UserEntity
+import com.mreigar.domain.model.EmailPattern
 import java.util.*
 
 object DataEntityInstrument {
@@ -12,6 +14,8 @@ object DataEntityInstrument {
     fun givenCommentEntity(id: Int = 1, postId: Int = 1) = CommentEntity(id, postId, "name", "name@mail.com", "body")
 
     fun givenUserEntity(userId: Int = 1) = UserEntity(userId, "name", "username", "name@mail.com")
+
+    fun givenEmailEmojiEntity(pattern: EmailPattern = EmailPattern.INFO, emojis: String = "fake-emojis") = EmailEmojiEntity(pattern, emojis)
 
     fun givenPostEntityList(size: Int): List<PostEntity> {
         val list: MutableList<PostEntity> = LinkedList<PostEntity>()
