@@ -1,8 +1,8 @@
-name: Android develop CI
+name: Android release CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
 
 env:
   KEY_PATH: ${{ secrets.STORE_FILE }}
@@ -11,6 +11,7 @@ env:
   KEY_PASSWORD: ${{ secrets.KEY_PASS }}
 
 jobs:
+
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
@@ -40,11 +41,15 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+      - run: echo $SIGNING_KEY | base64 -d > app/release.keystore
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
 
-      - name: Upload APK
+      - name: Build release APK
+        run: bash ./gradlew assembleRelease --stacktrace
+
+      - name: Upload release APK
         uses: actions/upload-artifact@v1
         with:
-          name: post-app
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: lego-app-release
+          path: app/build/outputs/apk/release/app-release.apk

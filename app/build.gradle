@@ -27,9 +27,36 @@ android {
         }
     }
 
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
+            // Load keystore
+            Properties properties = new Properties()
+            def keystorePropertiesFile = file("keystore.properties")
+            if (keystorePropertiesFile.exists()) {
+                properties.load(new FileInputStream(keystorePropertiesFile))
+            } else {
+                properties.setProperty('STORE_FILE', System.getenv('KEY_PATH'))
+                properties.setProperty('STORE_PASS', System.getenv('KEY_STORE_PASSWORD'))
+                properties.setProperty('KEY_ALIAS', System.getenv('ALIAS'))
+                properties.setProperty('KEY_PASS', System.getenv('KEY_PASSWORD'))
+            }
+
+            storeFile file(properties['STORE_FILE'])
+            storePassword properties['STORE_PASS']
+            keyAlias properties['KEY_ALIAS']
+            keyPassword properties['KEY_PASS']
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
