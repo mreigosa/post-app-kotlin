@@ -6,9 +6,9 @@ import com.mreigar.domain.executor.NoData
 import com.mreigar.domain.executor.Success
 import instrumentation.data.DataEntityInstrument.givenUserEntity
 import instrumentation.localdatasource.DatabaseDataSourceStatus
-import instrumentation.localdatasource.UserDatabaseDataSourceConfiguration
+import instrumentation.localdatasource.configuration.UserDatabaseDataSourceConfiguration
 import instrumentation.localdatasource.UserDatabaseDataSourceInstrument
-import instrumentation.remotedatasource.UserRemoteDataSourceConfiguration
+import instrumentation.remotedatasource.configuration.UserRemoteDataSourceConfiguration
 import instrumentation.remotedatasource.UserRemoteDataSourceInstrument
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -34,7 +34,10 @@ class UserRepositoryTest {
     @Test
     fun `given user repository, when retrieve user by id not retrieved from database, retrieve data from remote is success`() {
         val repository = UserRepository(
-            UserRemoteDataSourceInstrument.givenUserRemoteDataSource(configuration = UserRemoteDataSourceConfiguration(userEntityList = listOf(givenUserEntity(userId = 1)))),
+            UserRemoteDataSourceInstrument.givenUserRemoteDataSource(configuration = UserRemoteDataSourceConfiguration(
+                userEntityList = listOf(givenUserEntity(userId = 1))
+            )
+            ),
             UserDatabaseDataSourceInstrument.givenUserDatabaseDataSource(DatabaseDataSourceStatus.NO_DATA)
         )
 
@@ -48,7 +51,10 @@ class UserRepositoryTest {
     @Test
     fun `given user repository, when retrieve user by id not retrieved from database or remote, no data result`() {
         val repository = UserRepository(
-            UserRemoteDataSourceInstrument.givenUserRemoteDataSource(configuration = UserRemoteDataSourceConfiguration(userEntityList = listOf(givenUserEntity(userId = 1)))),
+            UserRemoteDataSourceInstrument.givenUserRemoteDataSource(configuration = UserRemoteDataSourceConfiguration(
+                userEntityList = listOf(givenUserEntity(userId = 1))
+            )
+            ),
             UserDatabaseDataSourceInstrument.givenUserDatabaseDataSource(DatabaseDataSourceStatus.NO_DATA)
         )
 

@@ -7,7 +7,7 @@ import com.mreigar.domain.executor.usecase.GetCommentsByPostUseCase
 import com.mreigar.domain.executor.usecase.params.GetCommentsByPostUseCaseParams
 import com.mreigar.domain.model.EmailEmoji
 import com.mreigar.domain.model.EmailPattern
-import instrumentation.data.ComplementaryDetailsRepositoryInstrument
+import instrumentation.data.PostDetailsRepositoryInstrument
 import instrumentation.data.PostRepositoryInstrument
 import instrumentation.data.RepositoryStatus
 import instrumentation.domain.DomainEntityInstrument.givenComment
@@ -22,7 +22,7 @@ class GetCommentsByPostUseCaseTest {
     fun `given a use case then invoke without params returns error result`() {
         val useCase = GetCommentsByPostUseCase(
             PostRepositoryInstrument.givenPostRepository(),
-            ComplementaryDetailsRepositoryInstrument.givenComplementaryDetailsRepository(),
+            PostDetailsRepositoryInstrument.givenPostDetailsRepository(),
             TestContextProvider()
         )
 
@@ -38,7 +38,7 @@ class GetCommentsByPostUseCaseTest {
     fun `given a use case then invoke with success result`() {
         val useCase = GetCommentsByPostUseCase(
             PostRepositoryInstrument.givenPostRepository(),
-            ComplementaryDetailsRepositoryInstrument.givenComplementaryDetailsRepository(),
+            PostDetailsRepositoryInstrument.givenPostDetailsRepository(),
             TestContextProvider()
         )
 
@@ -56,7 +56,7 @@ class GetCommentsByPostUseCaseTest {
     fun `given a use case then invoke with no data result`() {
         val useCase = GetCommentsByPostUseCase(
             PostRepositoryInstrument.givenPostRepository(status = RepositoryStatus.ERROR),
-            ComplementaryDetailsRepositoryInstrument.givenComplementaryDetailsRepository(),
+            PostDetailsRepositoryInstrument.givenPostDetailsRepository(),
             TestContextProvider()
         )
 
@@ -76,7 +76,7 @@ class GetCommentsByPostUseCaseTest {
             PostRepositoryInstrument.givenPostRepository(
                 commentList = listOf(givenComment(email = "martin@mail.info"), givenComment(email = "martin@mail.com"))
             ),
-            ComplementaryDetailsRepositoryInstrument.givenComplementaryDetailsRepository(
+            PostDetailsRepositoryInstrument.givenPostDetailsRepository(
                 emailEmojis = listOf(EmailEmoji(EmailPattern.INFO, "fake-emoji"))
             ),
             TestContextProvider()
@@ -91,20 +91,18 @@ class GetCommentsByPostUseCaseTest {
                     Assertions.assertThat((result as Success).data).isNotNull()
                     Assertions.assertThat(result.data).isNotEmpty()
                     Assertions.assertThat(result.data[0].details).isNotNull()
-                    Assertions.assertThat(result.data[1].details).isNull()
+                    Assertions.assertThat(result.data[0].details!!.emojis).isNotNull()
+                    Assertions.assertThat(result.data[1].details).isNotNull()
+                    Assertions.assertThat(result.data[1].details!!.emojis).isNull()
                 }
         }
     }
 
     @Test
-    fun `given a use case, if no complementary info retrieved for pattern, valid email without details`() {
+    fun `given a use case, avatar info is retrieved`() {
         val useCase = GetCommentsByPostUseCase(
-            PostRepositoryInstrument.givenPostRepository(
-                commentList = listOf(givenComment(email = "martin@mail.info"), givenComment(email = "martin@mail.co.uk"))
-            ),
-            ComplementaryDetailsRepositoryInstrument.givenComplementaryDetailsRepository(
-                emailEmojis = listOf(EmailEmoji(EmailPattern.UK, "uk-emoji"))
-            ),
+            PostRepositoryInstrument.givenPostRepository(commentList = listOf(givenComment(email = "martin@mail.info"))),
+            PostDetailsRepositoryInstrument.givenPostDetailsRepository(avatarUrl = "email.avatar.com"),
             TestContextProvider()
         )
 
@@ -116,8 +114,9 @@ class GetCommentsByPostUseCaseTest {
                     Assertions.assertThat(result is Success).isTrue()
                     Assertions.assertThat((result as Success).data).isNotNull()
                     Assertions.assertThat(result.data).isNotEmpty()
-                    Assertions.assertThat(result.data[0].details).isNull()
-                    Assertions.assertThat(result.data[1].details).isNotNull
+                    Assertions.assertThat(result.data[0].details).isNotNull()
+                    Assertions.assertThat(result.data[0].details!!.avatarUrl).isNotBlank()
+                    Assertions.assertThat(result.data[0].details!!.avatarUrl).isEqualTo("email.avatar.com")
                 }
         }
     }

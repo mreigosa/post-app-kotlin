@@ -3,6 +3,7 @@ package instrumentation.remotedatasource
 import com.mreigar.data.datasource.PostRemoteDataSourceContract
 import com.mreigar.data.model.CommentEntity
 import com.mreigar.data.model.PostEntity
+import instrumentation.remotedatasource.configuration.PostRemoteDataSourceConfiguration
 
 object PostRemoteDataSourceInstrument {
 

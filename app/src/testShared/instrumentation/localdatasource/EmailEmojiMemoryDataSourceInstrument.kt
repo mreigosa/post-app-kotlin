@@ -2,6 +2,7 @@ package instrumentation.localdatasource
 
 import com.mreigar.data.datasource.EmojiMemoryDataSourceContract
 import com.mreigar.data.model.EmailEmojiEntity
+import instrumentation.localdatasource.configuration.EmailEmojiMemoryDataSourceConfiguration
 
 object EmailEmojiMemoryDataSourceInstrument {
 
