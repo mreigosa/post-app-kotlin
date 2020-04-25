@@ -3,8 +3,9 @@ package com.mreigar.postapp.espresso.postlist
 import com.mreigar.domain.model.Post
 import com.mreigar.postapp.R
 import com.mreigar.presentation.mapper.PostViewModelMapper
-import com.schibsted.spain.barista.assertion.BaristaListAssertions
+import com.schibsted.spain.barista.assertion.BaristaListAssertions.assertDisplayedAtPosition
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions
+import com.schibsted.spain.barista.interaction.BaristaListInteractions.clickListItem
 
 class PostListScreenRobot {
 
@@ -21,19 +22,23 @@ class PostListScreenRobot {
         for (i in 0 until postList.size - 1) {
             val post = PostViewModelMapper().mapToView(postList[i])
 
-            BaristaListAssertions.assertDisplayedAtPosition(
+            assertDisplayedAtPosition(
                 listId = R.id.postRecyclerView,
                 position = i,
                 targetViewId = R.id.postTitle,
                 text = post.title
             )
 
-            BaristaListAssertions.assertDisplayedAtPosition(
+            assertDisplayedAtPosition(
                 listId = R.id.postRecyclerView,
                 position = i,
                 targetViewId = R.id.postMessage,
                 text = post.body
             )
         }
+    }
+
+    fun clickPost(position: Int = 0) {
+        clickListItem(R.id.postRecyclerView, position)
     }
 }

@@ -5,7 +5,7 @@ import java.util.*
 
 object DomainEntityInstrument {
 
-    fun givenPost() = Post(1, 1, "title", "body")
+    fun givenPost(id: Int = 1, userId: Int = 1) = Post(userId, id, "title", "body")
 
     fun givenUser(userId: Int = 1) = User(userId, "name", "username", "name@mail.com", "avatar.url.com")
 

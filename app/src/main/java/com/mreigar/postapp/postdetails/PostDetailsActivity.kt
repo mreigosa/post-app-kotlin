@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_post_details.*
 class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsViewTranslator {
 
     companion object {
-        private const val PARAMS_ARG = "postParams"
+        const val PARAMS_ARG = "postParams"
 
         fun intent(context: Context, post: PostViewModel) =
             Intent(context, PostDetailsActivity::class.java).apply {
