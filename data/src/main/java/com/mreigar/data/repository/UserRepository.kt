@@ -42,6 +42,4 @@ class UserRepository(
             Success(mapper.mapFromEntity(userEntity), DataStatus.LOCAL)
         } ?: NoData
     }
-
-
 }

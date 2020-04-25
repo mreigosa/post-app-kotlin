@@ -13,7 +13,7 @@ object DomainModules {
         single<DispatcherProvider> { DispatcherProviderImpl() }
 
         single { GetPostsUseCase(get(), get()) }
-        single { GetUserByPostUseCase(get(), get()) }
+        single { GetUserByPostUseCase(get(), get(), get()) }
         single { GetCommentsByPostUseCase(get(), get(), get()) }
     }
 }

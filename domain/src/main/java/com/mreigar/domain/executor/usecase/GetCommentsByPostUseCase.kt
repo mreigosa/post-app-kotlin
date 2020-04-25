@@ -7,12 +7,12 @@ import com.mreigar.domain.executor.Success
 import com.mreigar.domain.executor.UseCase
 import com.mreigar.domain.executor.usecase.params.GetCommentsByPostUseCaseParams
 import com.mreigar.domain.model.*
-import com.mreigar.domain.repository.ComplementaryDetailsRepositoryContract
+import com.mreigar.domain.repository.PostDetailsRepositoryContract
 import com.mreigar.domain.repository.PostRepositoryContract
 
 class GetCommentsByPostUseCase(
     private val postRepository: PostRepositoryContract,
-    private val complementaryDetailsRepository: ComplementaryDetailsRepositoryContract,
+    private val postDetailsRepository: PostDetailsRepositoryContract,
     dispatcherProvider: DispatcherProvider
 ) : UseCase<GetCommentsByPostUseCaseParams, List<Comment>>(dispatcherProvider) {
 
@@ -20,12 +20,11 @@ class GetCommentsByPostUseCase(
         if (params == null) return Error()
 
         val commentsResult = postRepository.getCommentsByPostId(params.postId)
-
         if (commentsResult is Success && params.showComplementaryInfo) {
-            val extraDetailsResult = complementaryDetailsRepository.getEmailEmojis()
-            if (extraDetailsResult is Success) {
+            val emojisResult = postDetailsRepository.getEmailEmojis()
+            if (emojisResult is Success) {
                 val commentsWithDetails = commentsResult.data.map {
-                    it.copy(details = getCommentDetails(it.email, extraDetailsResult.data))
+                    it.copy(details = getCommentDetails(it.email, emojisResult.data))
                 }
                 return Success(commentsWithDetails, commentsResult.dataStatus)
             }
@@ -34,12 +33,11 @@ class GetCommentsByPostUseCase(
         return commentsResult
     }
 
-    private fun getCommentDetails(email: String, emailEmojis: List<EmailEmoji>): CommentDetails? {
+    private fun getCommentDetails(email: String, emailEmojis: List<EmailEmoji>): CommentDetails {
         val pattern = getEmailPatternFromEmail(email)
-        return if (pattern == EmailPattern.NO_VALID_PATTERN) {
-            null
-        } else {
-            emailEmojis.firstOrNull { it.email == pattern }?.let { CommentDetails(it.emojis) }
-        }
+        return CommentDetails(
+            emojis = if (pattern == EmailPattern.NO_VALID_PATTERN) null else emailEmojis.firstOrNull { it.email == pattern }?.emojis,
+            avatarUrl = (postDetailsRepository.getAvatarUrl(email) as Success).data
+        )
     }
 }

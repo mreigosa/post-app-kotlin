@@ -5,6 +5,6 @@ import com.mreigar.presentation.model.UserViewModel
 
 class UserViewModelMapper : Mapper<User, UserViewModel> {
     override fun mapToView(domainEntity: User): UserViewModel = with(domainEntity) {
-        UserViewModel(name, username)
+        UserViewModel(name, username, email, avatarUrl.orEmpty())
     }
 }

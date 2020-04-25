@@ -1,37 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemCommentLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_regular">
+    android:padding="@dimen/margin_small">
 
-    <TextView
-        android:id="@+id/itemCommentEmail"
+    <ImageView
+        android:id="@+id/itemCommentAvatar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/margin_regular"
+        android:elevation="10dp"
+        tools:src="@drawable/ic_launcher_foreground"
+        tools:tint="@color/colorAccent" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        tools:text="comment title" />
+        android:layout_marginStart="15dp"
+        android:background="@drawable/card_background"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/margin_regular"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_regular"
+        android:paddingBottom="@dimen/margin_small">
 
-    <TextView
-        android:id="@+id/itemCommentTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:layout_below="@id/itemCommentEmail"
-        tools:text="comment title" />
+        <TextView
+            android:id="@+id/itemCommentEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginStart="@dimen/margin_small"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            tools:text="username@email.com" />
 
-    <TextView
-        android:id="@+id/itemCommentMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/itemCommentTitle"
-        android:ellipsize="end"
-        android:textSize="12sp"
-        tools:text="comment message goes here" />
+        <TextView
+            android:id="@+id/itemCommentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemCommentEmail"
+            android:layout_marginStart="@dimen/margin_small"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textColor="@color/black"
+            tools:text="comment title" />
+
+        <TextView
+            android:id="@+id/itemCommentMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemCommentTitle"
+            android:layout_marginStart="@dimen/margin_small"
+
+            android:ellipsize="end"
+            android:textSize="12sp"
+            tools:text="comment message goes here" />
+    </RelativeLayout>
 </RelativeLayout>

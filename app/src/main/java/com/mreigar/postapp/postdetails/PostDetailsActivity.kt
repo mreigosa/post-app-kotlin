@@ -3,9 +3,9 @@ package com.mreigar.postapp.postdetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.mreigar.postapp.BaseActivity
 import com.mreigar.postapp.R
@@ -42,7 +42,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
             adapter = commentAdapter
             layoutManager = LinearLayoutManager(this@PostDetailsActivity)
             isNestedScrollingEnabled = false
-            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
     }
 
@@ -70,10 +69,14 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
     override fun showUserInfo(user: UserViewModel) {
         postDetailsUserName.text = user.name
         postDetailsUserUsername.text = user.username
+        Glide.with(this)
+            .load(user.avatarUrl)
+            .apply(RequestOptions.circleCropTransform())
+            .into(postDetailsUserAvatar)
     }
 
     override fun showComments(comments: List<CommentViewModel>) {
-        postDetailsCommentsTitle.text = "${comments.size} Comments _____________"
+        postDetailsCommentsTitle.text = getString(R.string.comment_list_header).format(comments.size)
         commentAdapter.setComments(comments)
     }
 

@@ -6,6 +6,6 @@ import com.mreigar.presentation.model.CommentViewModel
 class CommentViewModelMapper : Mapper<Comment, CommentViewModel> {
 
     override fun mapToView(domainEntity: Comment): CommentViewModel = with(domainEntity) {
-        CommentViewModel(name, email, body, details?.emojis.orEmpty())
+        CommentViewModel(name, email, body, details?.emojis.orEmpty(), details?.avatarUrl.orEmpty())
     }
 }
