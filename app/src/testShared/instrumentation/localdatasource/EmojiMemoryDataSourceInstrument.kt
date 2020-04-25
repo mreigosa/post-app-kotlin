@@ -2,13 +2,13 @@ package instrumentation.localdatasource
 
 import com.mreigar.data.datasource.EmojiMemoryDataSourceContract
 import com.mreigar.data.model.EmailEmojiEntity
-import instrumentation.localdatasource.configuration.EmailEmojiMemoryDataSourceConfiguration
+import instrumentation.localdatasource.configuration.EmojiMemoryDataSourceConfiguration
 
-object EmailEmojiMemoryDataSourceInstrument {
+object EmojiMemoryDataSourceInstrument {
 
-    fun givenEmailEmojiMemoryDataSource(
+    fun givenEmojiMemoryDataSource(
         status: DatabaseDataSourceStatus = DatabaseDataSourceStatus.SUCCESS,
-        configuration: EmailEmojiMemoryDataSourceConfiguration = EmailEmojiMemoryDataSourceConfiguration()
+        configuration: EmojiMemoryDataSourceConfiguration = EmojiMemoryDataSourceConfiguration()
     ): EmojiMemoryDataSourceContract = object : EmojiMemoryDataSourceContract {
         override fun getEmailEmojis(): List<EmailEmojiEntity> =
             when (status) {

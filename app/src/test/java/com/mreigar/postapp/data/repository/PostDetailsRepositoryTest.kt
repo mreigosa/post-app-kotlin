@@ -2,11 +2,10 @@ package com.mreigar.postapp.data.repository
 
 import com.mreigar.data.repository.PostDetailsRepository
 import com.mreigar.domain.executor.DataStatus
-import com.mreigar.domain.executor.Error
 import com.mreigar.domain.executor.Success
 import instrumentation.localdatasource.AvatarMemoryDataSourceInstrument.givenAvatarMemoryDataSource
 import instrumentation.localdatasource.DatabaseDataSourceStatus
-import instrumentation.localdatasource.EmailEmojiMemoryDataSourceInstrument.givenEmailEmojiMemoryDataSource
+import instrumentation.localdatasource.EmojiMemoryDataSourceInstrument.givenEmojiMemoryDataSource
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
@@ -15,7 +14,7 @@ class PostDetailsRepositoryTest {
     @Test
     fun `given repository, email emojis are retrieved with success result`() {
         val repository = PostDetailsRepository(
-            givenEmailEmojiMemoryDataSource(),
+            givenEmojiMemoryDataSource(),
             givenAvatarMemoryDataSource()
         )
 
@@ -30,7 +29,7 @@ class PostDetailsRepositoryTest {
     @Test
     fun `given repository, when email emojis not retrieved, empty success result`() {
         val repository = PostDetailsRepository(
-            givenEmailEmojiMemoryDataSource(status = DatabaseDataSourceStatus.NO_DATA),
+            givenEmojiMemoryDataSource(status = DatabaseDataSourceStatus.NO_DATA),
             givenAvatarMemoryDataSource()
         )
 
@@ -45,7 +44,7 @@ class PostDetailsRepositoryTest {
     @Test
     fun `given repository, avatar is returned with success result`() {
         val repository = PostDetailsRepository(
-            givenEmailEmojiMemoryDataSource(),
+            givenEmojiMemoryDataSource(),
             givenAvatarMemoryDataSource()
         )
 
