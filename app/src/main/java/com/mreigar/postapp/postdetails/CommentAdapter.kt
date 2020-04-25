@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mreigar.postapp.R
 import com.mreigar.presentation.model.CommentViewModel
 import kotlinx.android.synthetic.main.layout_comment_item.view.*
@@ -37,6 +39,7 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
             itemCommentEmail.text = "${comment.email} ${comment.emailEmojis}"
             itemCommentTitle.text = comment.name
             itemCommentMessage.text = comment.body
+            Glide.with(this).load(comment.avatarUrl).apply(RequestOptions.circleCropTransform()).into(itemCommentAvatar)
         }
     }
 }

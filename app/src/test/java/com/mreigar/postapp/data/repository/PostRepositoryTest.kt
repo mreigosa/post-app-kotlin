@@ -7,7 +7,7 @@ import com.mreigar.domain.executor.Success
 import instrumentation.data.DataEntityInstrument.givenCommentEntity
 import instrumentation.localdatasource.DatabaseDataSourceStatus
 import instrumentation.localdatasource.PostDatabaseDataSourceInstrument
-import instrumentation.remotedatasource.PostRemoteDataSourceConfiguration
+import instrumentation.remotedatasource.configuration.PostRemoteDataSourceConfiguration
 import instrumentation.remotedatasource.PostRemoteDataSourceInstrument
 import instrumentation.remotedatasource.RemoteDataSourceStatus
 import org.assertj.core.api.Assertions.assertThat

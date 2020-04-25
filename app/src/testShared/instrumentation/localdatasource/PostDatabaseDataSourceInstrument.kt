@@ -3,6 +3,7 @@ package instrumentation.localdatasource
 import com.mreigar.data.datasource.PostDatabaseDataSourceContract
 import com.mreigar.data.model.CommentEntity
 import com.mreigar.data.model.PostEntity
+import instrumentation.localdatasource.configuration.PostDatabaseDataSourceConfiguration
 
 object PostDatabaseDataSourceInstrument {
 

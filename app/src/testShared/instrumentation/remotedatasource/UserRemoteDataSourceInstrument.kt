@@ -2,6 +2,7 @@ package instrumentation.remotedatasource
 
 import com.mreigar.data.datasource.UserRemoteDataSourceContract
 import com.mreigar.data.model.UserEntity
+import instrumentation.remotedatasource.configuration.UserRemoteDataSourceConfiguration
 
 object UserRemoteDataSourceInstrument {
 

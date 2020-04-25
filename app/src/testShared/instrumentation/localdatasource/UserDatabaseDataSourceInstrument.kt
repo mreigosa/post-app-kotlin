@@ -2,6 +2,7 @@ package instrumentation.localdatasource
 
 import com.mreigar.data.datasource.UserDatabaseDataSourceContract
 import com.mreigar.data.model.UserEntity
+import instrumentation.localdatasource.configuration.UserDatabaseDataSourceConfiguration
 
 object UserDatabaseDataSourceInstrument {
 

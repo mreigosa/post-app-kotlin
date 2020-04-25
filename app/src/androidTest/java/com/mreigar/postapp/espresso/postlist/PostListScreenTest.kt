@@ -5,7 +5,7 @@ import com.mreigar.data.maper.PostMapper
 import com.mreigar.postapp.espresso.postlist.PostListScreenRobot.Companion.postList
 import com.mreigar.postapp.espresso.utils.PostAppTestRunner
 import com.mreigar.postapp.postlist.PostListActivity
-import instrumentation.remotedatasource.PostRemoteDataSourceConfiguration
+import instrumentation.remotedatasource.configuration.PostRemoteDataSourceConfiguration
 import instrumentation.remotedatasource.PostRemoteDataSourceInstrument
 import instrumentation.remotedatasource.givenPostEntityList
 import org.junit.Rule

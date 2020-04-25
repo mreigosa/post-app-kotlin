@@ -1,4 +1,4 @@
-package instrumentation.localdatasource
+package instrumentation.localdatasource.configuration
 
 import com.mreigar.data.model.UserEntity
 import instrumentation.data.DataEntityInstrument

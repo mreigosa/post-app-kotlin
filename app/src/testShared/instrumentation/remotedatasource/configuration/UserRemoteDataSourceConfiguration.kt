@@ -1,4 +1,4 @@
-package instrumentation.remotedatasource
+package instrumentation.remotedatasource.configuration
 
 import com.mreigar.data.model.UserEntity
 import instrumentation.data.DataEntityInstrument

@@ -7,7 +7,7 @@ object DomainEntityInstrument {
 
     fun givenPost() = Post(1, 1, "title", "body")
 
-    fun givenUser(userId: Int = 1) = User(userId, "name", "username", "name@mail.com")
+    fun givenUser(userId: Int = 1) = User(userId, "name", "username", "name@mail.com", "avatar.url.com")
 
     fun givenComment(id: Int = 1, postId: Int = 1, email: String = "name@mail.com") = Comment(id, postId, "name", email, "body", null)
 
