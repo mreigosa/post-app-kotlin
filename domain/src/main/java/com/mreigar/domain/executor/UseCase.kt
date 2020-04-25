@@ -3,16 +3,16 @@ package com.mreigar.domain.executor
 import com.mreigar.domain.DispatcherProvider
 import kotlinx.coroutines.*
 
-abstract class UseCase<P : Any, T>(private val dispatcherProvider: DispatcherProvider = DispatcherProviderImpl()) {
+abstract class UseCase<P : Any, T>(private val dispatcherProvider: DispatcherProvider) {
 
-    protected var useCaseParams: P? = null
+    private var useCaseParams: P? = null
 
     abstract suspend fun run(params: P?): Result<T>
 
     operator fun invoke(scope: CoroutineScope, callback: Callback<T>? = null) {
-        scope.launch {
+        scope.launch(dispatcherProvider.main) {
             try {
-                val result = async(dispatcherProvider.background) { run(useCaseParams) }.await()
+                val result = withContext(dispatcherProvider.background) { run(useCaseParams) }
                 callback?.invoke(result)
             } catch (e: Exception) {
                 Error(e)

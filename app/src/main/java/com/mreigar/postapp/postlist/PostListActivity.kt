@@ -1,6 +1,8 @@
 package com.mreigar.postapp.postlist
 
 import android.os.Bundle
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.mreigar.postapp.BaseActivity
@@ -8,6 +10,7 @@ import com.mreigar.postapp.R
 import com.mreigar.postapp.extension.gone
 import com.mreigar.postapp.extension.visible
 import com.mreigar.postapp.injection.injectActivity
+import com.mreigar.postapp.postdetails.PostDetailsActivity
 import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
@@ -26,6 +29,7 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
         postRecyclerView.apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(this@PostListActivity)
+            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
     }
 
@@ -43,6 +47,11 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
     }
 
     override fun showError() {
+        hideLoader()
         Snackbar.make(findViewById(android.R.id.content), "Error loading posts", Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun showPostDetails(post: PostViewModel) {
+        startActivity(PostDetailsActivity.intent(this, post))
     }
 }

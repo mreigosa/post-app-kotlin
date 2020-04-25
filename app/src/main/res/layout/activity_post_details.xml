@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_bg_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/postDetailsUserCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_regular"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_regular">
+
+                <ImageView
+                    android:id="@+id/postDetailsUserAvatar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    tools:src="@drawable/ic_launcher_foreground"
+                    tools:tint="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/postDetailsUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/postDetailsUserAvatar"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="User Name" />
+
+                <TextView
+                    android:id="@+id/postDetailsUserUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/postDetailsUserName"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/postDetailsUserAvatar"
+                    android:textSize="12sp"
+                    tools:text="username" />
+
+                <TextView
+                    android:id="@+id/postDetailsBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/postDetailsUserAvatar"
+                    android:layout_marginTop="@dimen/margin_regular"
+                    android:textSize="12sp"
+                    tools:text="post body goes here" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/postDetailsCommentsTitleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postDetailsUserCard">
+
+            <TextView
+                android:id="@+id/postDetailsCommentsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_regular"
+                android:layout_marginEnd="@dimen/margin_regular"
+                android:textSize="14sp"
+                tools:text="Comments (52)" />
+
+            <ProgressBar
+                android:id="@+id/postDetailsLoader"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/postDetailsCommentsTitle"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postDetailsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postDetailsCommentsTitleContainer"
+            tools:listitem="@layout/layout_comment_item" />
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

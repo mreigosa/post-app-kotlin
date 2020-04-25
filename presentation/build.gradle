@@ -7,6 +7,4 @@ dependencies {
 
     implementation "org.koin:koin-android:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }

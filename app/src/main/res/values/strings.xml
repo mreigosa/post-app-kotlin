@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Post App</string>
+    <string name="comment_list_header">Comments (%s)</string>
 </resources>

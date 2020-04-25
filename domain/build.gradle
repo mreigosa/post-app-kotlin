@@ -10,5 +10,6 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
 
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }

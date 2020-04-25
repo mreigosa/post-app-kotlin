@@ -14,12 +14,13 @@ class PostListPresenter(
 
     private val mapper: PostViewModelMapper = PostViewModelMapper()
 
-    override fun onStart() {
-        super.onStart()
+    override fun onReady() {
+        super.onReady()
         fetchPosts()
     }
 
     private fun fetchPosts() {
+        view()?.showLoader()
         getPostsUseCase.invoke(this) { result ->
             when (result) {
                 is Success -> view()?.showData(result.data.map { mapper.mapToView(it) })
@@ -29,7 +30,7 @@ class PostListPresenter(
     }
 
     fun onPostClicked(post: PostViewModel) {
-
+        view()?.showPostDetails(post)
     }
 }
 
@@ -38,4 +39,5 @@ interface PostListViewTranslator {
     fun hideLoader()
     fun showData(posts: List<PostViewModel>)
     fun showError()
+    fun showPostDetails(post: PostViewModel)
 }
