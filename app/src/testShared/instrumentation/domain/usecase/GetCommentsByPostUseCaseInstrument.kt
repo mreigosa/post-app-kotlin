@@ -14,7 +14,6 @@ object GetCommentsByPostUseCaseInstrument {
         commentList: List<Comment>? = null
     ) = GetCommentsByPostUseCase(
         givenPostRepository(status = repositoryStatus, commentList = commentList),
-        PostDetailsRepositoryInstrument.givenPostDetailsRepository(),
-        TestContextProvider()
+        PostDetailsRepositoryInstrument.givenPostDetailsRepository()
     )
 }

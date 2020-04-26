@@ -5,6 +5,7 @@ import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
 import instrumentation.data.RepositoryStatus
+import instrumentation.domain.InvokerInstruments
 import instrumentation.domain.usecase.GetPostsUseCaseInstrument
 
 object PostListPresenterInstrument {
@@ -15,7 +16,8 @@ object PostListPresenterInstrument {
         postList: List<Post>? = null
     ) = PostListPresenter(
         givenPostListViewTranslator(callbackResult),
-        givenGetPostsUseCase(getPostsIsSuccess, postList)
+        givenGetPostsUseCase(getPostsIsSuccess, postList),
+        InvokerInstruments.givenAnInvoker()
     )
 
     private fun givenGetPostsUseCase(getPostsIsSuccess: Boolean, postList: List<Post>?) =

@@ -8,6 +8,7 @@ import com.mreigar.presentation.model.UserViewModel
 import com.mreigar.presentation.presenter.PostDetailsPresenter
 import com.mreigar.presentation.presenter.PostDetailsViewTranslator
 import instrumentation.data.RepositoryStatus
+import instrumentation.domain.InvokerInstruments
 import instrumentation.domain.usecase.GetCommentsByPostUseCaseInstrument.givenGetCommentsByPostUseCase
 import instrumentation.domain.usecase.GetUserByPostUseCaseInstrument.givenGetUserByPostUseCase
 import instrumentation.presentation.PresentationEntityInstrument.givenPostViewModel
@@ -30,7 +31,8 @@ object PostDetailsPresenterInstrument {
         givenGetCommentsByPostUseCase(
             repositoryStatus = if (getCommentsIsSuccess) RepositoryStatus.SUCCESS else RepositoryStatus.ERROR,
             commentList = commentList
-        )
+        ),
+        InvokerInstruments.givenAnInvoker()
     )
 
     private fun givenPostDetailsViewTranslator(callbackResult: PostDetailsCallbackResult, post: PostViewModel?) =

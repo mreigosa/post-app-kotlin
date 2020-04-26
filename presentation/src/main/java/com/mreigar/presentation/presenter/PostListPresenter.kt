@@ -1,5 +1,6 @@
 package com.mreigar.presentation.presenter
 
+import com.mreigar.domain.executor.Invoker
 import com.mreigar.domain.executor.Success
 import com.mreigar.domain.executor.usecase.GetPostsUseCase
 import com.mreigar.presentation.BasePresenter
@@ -9,8 +10,9 @@ import java.lang.ref.WeakReference
 
 class PostListPresenter(
     view: PostListViewTranslator,
-    private val getPostsUseCase: GetPostsUseCase
-) : BasePresenter<PostListViewTranslator>(WeakReference(view)) {
+    private val getPostsUseCase: GetPostsUseCase,
+    invoker: Invoker
+) : BasePresenter<PostListViewTranslator>(WeakReference(view), invoker) {
 
     private val mapper: PostViewModelMapper = PostViewModelMapper()
 
@@ -21,7 +23,7 @@ class PostListPresenter(
 
     private fun fetchPosts() {
         view()?.showLoader()
-        getPostsUseCase.invoke(this) { result ->
+        invoker.execute(this, getPostsUseCase) { result ->
             when {
                 result is Success && result.data.isNotEmpty() -> view()?.showData(result.data.map { mapper.mapToView(it) })
                 else -> view()?.showError()
