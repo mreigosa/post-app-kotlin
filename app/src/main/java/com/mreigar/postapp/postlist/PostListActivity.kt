@@ -1,10 +1,8 @@
 package com.mreigar.postapp.postlist
 
+import android.animation.ValueAnimator
 import android.os.Bundle
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.mreigar.postapp.BaseActivity
 import com.mreigar.postapp.R
 import com.mreigar.postapp.extension.gone
@@ -15,6 +13,7 @@ import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
 import kotlinx.android.synthetic.main.activity_post_list.*
+import kotlinx.android.synthetic.main.layout_empty_post_list.*
 
 class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslator {
 
@@ -29,12 +28,14 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
         postRecyclerView.apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(this@PostListActivity)
-            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
+
+        postListRefreshButton.setOnClickListener { presenter.onRefreshClicked() }
     }
 
     override fun showLoader() {
         postListLoader.visible()
+        postListEmptyLayout.gone()
     }
 
     override fun hideLoader() {
@@ -48,10 +49,19 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
 
     override fun showError() {
         hideLoader()
-        Snackbar.make(findViewById(android.R.id.content), "Error loading posts", Snackbar.LENGTH_LONG).show()
+        postListLottieView.apply {
+            setAnimation(R.raw.empty)
+            repeatCount = ValueAnimator.INFINITE
+            playAnimation()
+        }
+        postListEmptyLayout.visible()
     }
 
     override fun showPostDetails(post: PostViewModel) {
         startActivity(PostDetailsActivity.intent(this, post))
+    }
+
+    override fun hideError() {
+        postListEmptyLayout.gone()
     }
 }

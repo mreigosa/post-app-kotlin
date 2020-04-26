@@ -67,6 +67,14 @@ object PostDetailsPresenterInstrument {
             override fun showComments(comments: List<CommentViewModel>) {
                 callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_COMMENTS)
             }
+
+            override fun showCommentsError() {
+                callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_COMMENTS_ERROR)
+            }
+
+            override fun hideCommentsError() {
+                callbackResult.putMethodCall(PostDetailsViewMethod.HIDE_COMMENTS_ERROR)
+            }
         }
 }
 
@@ -80,5 +88,7 @@ enum class PostDetailsViewMethod {
     SHOW_ERROR,
     SHOW_POST_INFO,
     SHOW_USER_INFO,
-    SHOW_COMMENTS
+    SHOW_COMMENTS,
+    SHOW_COMMENTS_ERROR,
+    HIDE_COMMENTS_ERROR
 }

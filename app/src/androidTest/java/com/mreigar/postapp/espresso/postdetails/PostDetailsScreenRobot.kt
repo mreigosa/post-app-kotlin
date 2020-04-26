@@ -30,8 +30,18 @@ class PostDetailsScreenRobot {
         assertDisplayed(R.id.postDetailsBody, postViewModel.body)
         assertDisplayed(R.id.postDetailsUserName, userViewModel.name)
         assertDisplayed(R.id.postDetailsUserUsername, userViewModel.username)
-        assertDisplayed(R.id.postDetailsCommentsTitle, EspressoTestUtils.getText(R.string.comment_list_header, comments.size))
 
+        if (comments.isNotEmpty()) {
+            assertDisplayed(R.id.postDetailsCommentsTitle, EspressoTestUtils.getText(R.string.comment_list_header, comments.size))
+            hasCorrectCommentsContent(comments)
+        } else {
+            assertDisplayed(R.id.postDetailsCommentsTitle, EspressoTestUtils.getText(R.string.comment_list_header, "-"))
+            assertDisplayed(R.id.postDetailsEmptyCommentsText, EspressoTestUtils.getText(R.string.empty_comment_list_text))
+            assertDisplayed(R.id.postDetailsEmptyCommentsRefresh, EspressoTestUtils.getText(R.string.button_refresh))
+        }
+    }
+
+    private fun hasCorrectCommentsContent(comments: List<Comment>) {
         comments.forEachIndexed { index, comment ->
             val commentViewModel = CommentViewModelMapper().mapToView(comment)
 

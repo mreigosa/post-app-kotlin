@@ -63,4 +63,23 @@ class PostDetailsScreenTest : BaseScreenTest() {
         }
     }
 
+    @Test
+    fun given_post_details_screen_when_no_comments_retrieved_has_correct_content() {
+        val post = givenPost(userId = 5, id = 1)
+        val user = givenUserEntity(userId = 5)
+
+        initState(
+            post = PostViewModelMapper().mapToView(post),
+            users = listOf(user),
+            comments = listOf()
+        )
+
+        postDetails {
+            hasCorrectContent(
+                post = post,
+                user = UserMapper().mapFromEntity(user),
+                comments = listOf()
+            )
+        }
+    }
 }

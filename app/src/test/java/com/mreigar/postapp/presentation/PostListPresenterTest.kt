@@ -41,6 +41,17 @@ class PostListPresenterTest : AutoCloseKoinTest() {
     }
 
     @Test
+    fun `given post list presenter, when data retrieved is empty, then error is shown`() {
+        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult, true, listOf())
+
+        presenter.onReady()
+
+        assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_LOADER)).isTrue()
+        assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_DATA)).isFalse()
+        assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_ERROR)).isTrue()
+    }
+
+    @Test
     fun `given post list presenter, when post clicked, details are shown`() {
         presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult)
 
@@ -52,4 +63,13 @@ class PostListPresenterTest : AutoCloseKoinTest() {
         }).isTrue()
     }
 
+    @Test
+    fun `given post list presenter, when refresh button clicked, error is hidden`() {
+        presenter = PostListPresenterInstrument.givenPostListPresenter(callbackResult)
+
+        presenter.onRefreshClicked()
+
+        assertThat(callbackResult.isMethodFired(PostListViewMethod.HIDE_ERROR)).isTrue()
+        assertThat(callbackResult.isMethodFired(PostListViewMethod.SHOW_LOADER)).isTrue()
+    }
 }
