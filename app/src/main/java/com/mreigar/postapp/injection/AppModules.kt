@@ -15,7 +15,7 @@ inline fun <reified T : Any> Activity.injectActivity(): Lazy<T> = inject { param
 object AppModules {
 
     val presentationModules = module {
-        factory { (view: Context) -> PostListPresenter(view as PostListViewTranslator, get()) }
-        factory { (view: Context) -> PostDetailsPresenter(view as PostDetailsViewTranslator, get(), get()) }
+        factory { (view: Context) -> PostListPresenter(view as PostListViewTranslator, get(), get()) }
+        factory { (view: Context) -> PostDetailsPresenter(view as PostDetailsViewTranslator, get(), get(), get()) }
     }
 }

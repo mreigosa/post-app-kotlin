@@ -14,7 +14,6 @@ object GetUserByPostUseCaseInstrument {
         user: User? = null
     ) = GetUserByPostUseCase(
         givenUserRepository(status = repositoryStatus, user = user),
-        givenPostDetailsRepository(),
-        TestContextProvider()
+        givenPostDetailsRepository()
     )
 }
