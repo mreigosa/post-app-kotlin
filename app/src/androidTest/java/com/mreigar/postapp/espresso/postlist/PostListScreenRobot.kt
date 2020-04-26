@@ -4,7 +4,7 @@ import com.mreigar.domain.model.Post
 import com.mreigar.postapp.R
 import com.mreigar.presentation.mapper.PostViewModelMapper
 import com.schibsted.spain.barista.assertion.BaristaListAssertions.assertDisplayedAtPosition
-import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions
+import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.schibsted.spain.barista.interaction.BaristaListInteractions.clickListItem
 
 class PostListScreenRobot {
@@ -15,7 +15,15 @@ class PostListScreenRobot {
     }
 
     fun screenIsShown() {
-        BaristaVisibilityAssertions.assertDisplayed(R.id.postListLayout)
+        assertDisplayed(R.id.postListLayout)
+    }
+
+    fun errorIsShown() {
+        assertDisplayed(R.id.postListEmptyLayout)
+        assertDisplayed(R.id.postListLottieView)
+        assertDisplayed(R.id.postListEmptyTitle)
+        assertDisplayed(R.id.postListEmptyBody)
+        assertDisplayed(R.id.postListRefreshButton)
     }
 
     fun hasCorrectContent(postList: List<Post>) {

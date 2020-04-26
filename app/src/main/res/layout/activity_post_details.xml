@@ -94,6 +94,30 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/postDetailsCommentsTitleContainer"
             tools:listitem="@layout/layout_comment_item" />
+
+        <TextView
+            android:id="@+id/postDetailsEmptyCommentsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postDetailsCommentsTitleContainer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/margin_regular"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/margin_regular"
+            android:gravity="center"
+            android:text="@string/empty_comment_list_text"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/postDetailsEmptyCommentsRefresh"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postDetailsEmptyCommentsText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_regular"
+            android:text="@string/button_refresh"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

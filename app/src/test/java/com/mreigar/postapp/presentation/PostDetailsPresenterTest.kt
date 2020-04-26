@@ -79,6 +79,19 @@ class PostDetailsPresenterTest : AutoCloseKoinTest() {
         presenter.onReady()
 
         assertThat(callbackResult.isMethodFired(PostDetailsViewMethod.SHOW_LOADER)).isTrue()
-        assertThat(callbackResult.isMethodFired(PostDetailsViewMethod.SHOW_ERROR)).isTrue()
+        assertThat(callbackResult.isMethodFired(PostDetailsViewMethod.SHOW_COMMENTS_ERROR)).isTrue()
+    }
+
+    @Test
+    fun `given post details presenter, when refresh button clicked, error is hidden`() {
+        val presenter = givenPostDetailsPresenter(callbackResult)
+
+        presenter.onReady()
+        callbackResult.clearFiredMethods()
+
+        presenter.onRefreshCommentsClicked()
+
+        assertThat(callbackResult.isMethodFired(PostDetailsViewMethod.HIDE_COMMENTS_ERROR)).isTrue()
+        assertThat(callbackResult.isMethodFired(PostDetailsViewMethod.SHOW_LOADER)).isTrue()
     }
 }

@@ -37,12 +37,13 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_details)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         postDetailsRecyclerView.apply {
             adapter = commentAdapter
             layoutManager = LinearLayoutManager(this@PostDetailsActivity)
             isNestedScrollingEnabled = false
         }
+        postDetailsEmptyCommentsRefresh.setOnClickListener { presenter.onRefreshCommentsClicked() }
     }
 
     override fun getPostFromArgs(): PostViewModel? = (intent.extras?.get(PARAMS_ARG) as? PostViewModel)
@@ -80,5 +81,19 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
         commentAdapter.setComments(comments)
     }
 
+    override fun showCommentsError() {
+        postDetailsCommentsTitle.text = getString(R.string.comment_list_header).format("-")
+        postDetailsEmptyCommentsText.visible()
+        postDetailsEmptyCommentsRefresh.visible()
+    }
 
+    override fun hideCommentsError() {
+        postDetailsEmptyCommentsText.gone()
+        postDetailsEmptyCommentsRefresh.gone()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }
