@@ -22,8 +22,8 @@ class PostListPresenter(
     private fun fetchPosts() {
         view()?.showLoader()
         getPostsUseCase.invoke(this) { result ->
-            when (result) {
-                is Success -> view()?.showData(result.data.map { mapper.mapToView(it) })
+            when {
+                result is Success && result.data.isNotEmpty() -> view()?.showData(result.data.map { mapper.mapToView(it) })
                 else -> view()?.showError()
             }
         }
@@ -31,6 +31,12 @@ class PostListPresenter(
 
     fun onPostClicked(post: PostViewModel) {
         view()?.showPostDetails(post)
+    }
+
+    fun onRefreshClicked() {
+        view()?.hideError()
+        view()?.showLoader()
+        fetchPosts()
     }
 }
 
@@ -40,4 +46,5 @@ interface PostListViewTranslator {
     fun showData(posts: List<PostViewModel>)
     fun showError()
     fun showPostDetails(post: PostViewModel)
+    fun hideError()
 }

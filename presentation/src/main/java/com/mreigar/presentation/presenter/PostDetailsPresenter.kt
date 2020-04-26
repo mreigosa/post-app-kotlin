@@ -33,6 +33,12 @@ class PostDetailsPresenter(
         } ?: view()?.closeScreen()
     }
 
+    fun onRefreshCommentsClicked() {
+        view()?.hideCommentsError()
+        view()?.showLoader()
+        fetchComments()
+    }
+
     private fun fetchPostDetails() {
         view()?.showLoader()
         getUserByPostUseCase.withParams(post.userId).invoke(this) {
@@ -46,12 +52,16 @@ class PostDetailsPresenter(
     private fun onUserRetrieved(user: User) {
         view()?.showPostInfo(post)
         view()?.showUserInfo(userMapper.mapToView(user))
+        fetchComments()
+    }
+
+    private fun fetchComments() {
         getCommentsByPostUseCase
             .withParams(GetCommentsByPostUseCaseParams(post.id, true))
             .invoke(this) {
                 when (it) {
                     is Success -> onCommentsRetrieved(it.data)
-                    else -> view()?.showError()
+                    else -> view()?.showCommentsError()
                 }
             }
     }
@@ -71,4 +81,6 @@ interface PostDetailsViewTranslator {
     fun showPostInfo(post: PostViewModel)
     fun showUserInfo(user: UserViewModel)
     fun showComments(comments: List<CommentViewModel>)
+    fun showCommentsError()
+    fun hideCommentsError()
 }

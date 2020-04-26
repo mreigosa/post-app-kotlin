@@ -44,6 +44,10 @@ object PostListPresenterInstrument {
         override fun showPostDetails(post: PostViewModel) {
             callbackResult.putMethodCall(PostListViewMethod.SHOW_POST_DETAILS, post)
         }
+
+        override fun hideError() {
+            callbackResult.putMethodCall(PostListViewMethod.HIDE_ERROR)
+        }
     }
 }
 
@@ -54,5 +58,6 @@ enum class PostListViewMethod {
     HIDE_LOADER,
     SHOW_DATA,
     SHOW_ERROR,
-    SHOW_POST_DETAILS
+    SHOW_POST_DETAILS,
+    HIDE_ERROR
 }

@@ -63,4 +63,14 @@ class PostListScreenTest : BaseScreenTest() {
             screenIsShown()
         }
     }
+
+    @Test
+    fun given_post_list_activity_when_content_not_received_empty_screen_is_shown() {
+        initState(listOf())
+
+        postList {
+            screenIsShown()
+            errorIsShown()
+        }
+    }
 }
