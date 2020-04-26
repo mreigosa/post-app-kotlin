@@ -1,5 +1,6 @@
 package com.mreigar.presentation.presenter
 
+import com.mreigar.domain.executor.Invoker
 import com.mreigar.domain.executor.Success
 import com.mreigar.domain.executor.usecase.GetCommentsByPostUseCase
 import com.mreigar.domain.executor.usecase.GetUserByPostUseCase
@@ -17,8 +18,9 @@ import java.lang.ref.WeakReference
 class PostDetailsPresenter(
     view: PostDetailsViewTranslator,
     private val getUserByPostUseCase: GetUserByPostUseCase,
-    private val getCommentsByPostUseCase: GetCommentsByPostUseCase
-) : BasePresenter<PostDetailsViewTranslator>(WeakReference(view)) {
+    private val getCommentsByPostUseCase: GetCommentsByPostUseCase,
+    invoker: Invoker
+) : BasePresenter<PostDetailsViewTranslator>(WeakReference(view), invoker) {
 
     private val userMapper: UserViewModelMapper = UserViewModelMapper()
     private val commentMapper: CommentViewModelMapper = CommentViewModelMapper()
@@ -41,7 +43,7 @@ class PostDetailsPresenter(
 
     private fun fetchPostDetails() {
         view()?.showLoader()
-        getUserByPostUseCase.withParams(post.userId).invoke(this) {
+        invoker.execute(this, getUserByPostUseCase withParams (post.userId)) {
             when (it) {
                 is Success -> onUserRetrieved(it.data)
                 else -> view()?.showError()
@@ -56,14 +58,12 @@ class PostDetailsPresenter(
     }
 
     private fun fetchComments() {
-        getCommentsByPostUseCase
-            .withParams(GetCommentsByPostUseCaseParams(post.id, true))
-            .invoke(this) {
-                when (it) {
-                    is Success -> onCommentsRetrieved(it.data)
-                    else -> view()?.showCommentsError()
-                }
+        invoker.execute(this, getCommentsByPostUseCase withParams (GetCommentsByPostUseCaseParams(post.id, true))) {
+            when (it) {
+                is Success -> onCommentsRetrieved(it.data)
+                else -> view()?.showCommentsError()
             }
+        }
     }
 
     private fun onCommentsRetrieved(comments: List<Comment>) {

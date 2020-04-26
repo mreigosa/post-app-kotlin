@@ -12,7 +12,10 @@ import com.mreigar.postapp.postlist.PostListActivity
 import instrumentation.data.DataEntityInstrument.givenCommentEntityList
 import instrumentation.data.DataEntityInstrument.givenPostEntityList
 import instrumentation.data.DataEntityInstrument.givenUserEntity
+import instrumentation.localdatasource.DatabaseDataSourceStatus
+import instrumentation.localdatasource.configuration.PostDatabaseDataSourceConfiguration
 import instrumentation.localdatasource.configuration.UserDatabaseDataSourceConfiguration
+import instrumentation.remotedatasource.RemoteDataSourceStatus
 import instrumentation.remotedatasource.configuration.PostRemoteDataSourceConfiguration
 import org.junit.Rule
 import org.junit.Test
@@ -32,9 +35,15 @@ class PostListScreenTest : BaseScreenTest() {
             postEntityList = posts,
             commentEntityList = comments
         )
+        postDatabaseDataSourceConfiguration = PostDatabaseDataSourceConfiguration(
+            postEntityList = posts
+        )
         userDatabaseDataSourceConfiguration = UserDatabaseDataSourceConfiguration(
             userEntity = user
         )
+
+        //postRemoteDataSourceStatus = postRemoteDataSourceStatus
+        //postDatabaseDataSourceStatus =
 
         activityRule.launchActivity(null)
     }
@@ -66,6 +75,8 @@ class PostListScreenTest : BaseScreenTest() {
 
     @Test
     fun given_post_list_activity_when_content_not_received_empty_screen_is_shown() {
+        postRemoteDataSourceStatus = RemoteDataSourceStatus.ERROR
+        postDatabaseDataSourceStatus = DatabaseDataSourceStatus.NO_DATA
         initState(listOf())
 
         postList {

@@ -1,7 +1,5 @@
 package com.mreigar.domain.executor.usecase
 
-import com.mreigar.domain.DispatcherProvider
-import com.mreigar.domain.executor.Error
 import com.mreigar.domain.executor.Result
 import com.mreigar.domain.executor.Success
 import com.mreigar.domain.executor.UseCase
@@ -12,15 +10,12 @@ import com.mreigar.domain.repository.PostRepositoryContract
 
 class GetCommentsByPostUseCase(
     private val postRepository: PostRepositoryContract,
-    private val postDetailsRepository: PostDetailsRepositoryContract,
-    dispatcherProvider: DispatcherProvider
-) : UseCase<GetCommentsByPostUseCaseParams, List<Comment>>(dispatcherProvider) {
+    private val postDetailsRepository: PostDetailsRepositoryContract
+) : UseCase<GetCommentsByPostUseCaseParams, List<Comment>>() {
 
-    override suspend fun run(params: GetCommentsByPostUseCaseParams?): Result<List<Comment>> {
-        if (params == null) return Error()
-
-        val commentsResult = postRepository.getCommentsByPostId(params.postId)
-        if (commentsResult is Success && params.showComplementaryInfo) {
+    override suspend fun run(): Result<List<Comment>> {
+        val commentsResult = postRepository.getCommentsByPostId(useCaseParams.postId)
+        if (commentsResult is Success && useCaseParams.showComplementaryInfo) {
             val emojisResult = postDetailsRepository.getEmailEmojis()
             if (emojisResult is Success) {
                 val commentsWithDetails = commentsResult.data.map {
