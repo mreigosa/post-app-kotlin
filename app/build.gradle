@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "$jacoco_version"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
 
 android {
     compileSdkVersion rootProject.compileSdk
@@ -22,6 +31,8 @@ android {
     }
 
     testOptions {
+        animationsDisabled true
+
         unitTests {
             includeAndroidResources = true
         }
@@ -51,6 +62,7 @@ android {
     buildTypes {
         debug {
             debuggable true
+            testCoverageEnabled true
         }
         release {
             debuggable false
@@ -107,4 +119,53 @@ android.sourceSets {
     androidTest {
         java.srcDirs += "$projectDir/src/testShared"
     }
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+
+    def appClassTree = fileTree(dir: "../app/build/intermediates/javac/debug/classes/", excludes: fileFilter)
+    def appKotlinClassTree = fileTree(dir: "../app/build/tmp/kotlin-classes/debug/", excludes: fileFilter)
+    def appSrc = "../app/src/main/java"
+
+    def presentationKotlinClassTree = fileTree(dir: "../presentation/build/classes/kotlin/", excludes: fileFilter)
+    def presentationSrc = "../presentation/src/main/java"
+
+    def domainKotlinClassTree = fileTree(dir: "../domain/build/classes/kotlin/", excludes: fileFilter)
+    def domainSrc = "../domain/src/main/java"
+
+    def dataKotlinClassTree = fileTree(dir: "../data/build/classes/kotlin/", excludes: fileFilter)
+    def dataSrc = "../data/src/main/java"
+
+    def localKotlinClassTree = fileTree(dir: "../local-storage/build/tmp/kotlin-classes/debug/", excludes: fileFilter)
+    def localSrc = "../local-storage/src/main/java"
+
+    def remoteKotlinClassTree = fileTree(dir: "../network/build/classes/kotlin/", excludes: fileFilter)
+    def remoteSrc = "../network/src/main/java"
+
+    getClassDirectories().setFrom(files(
+            [appClassTree],
+            [appKotlinClassTree],
+            [presentationKotlinClassTree],
+            [domainKotlinClassTree],
+            [dataKotlinClassTree],
+            [localKotlinClassTree],
+            [remoteKotlinClassTree]
+    ))
+    getSourceDirectories().setFrom(files(
+            [appSrc],
+            [presentationSrc],
+            [domainSrc],
+            [dataSrc],
+            [localSrc],
+            [remoteSrc]
+    ))
+
+    executionData = fileTree(dir: project.buildDir, includes: ['jacoco/testDebugUnitTest.exec', 'outputs/code_coverage/debugAndroidTest/connected/**/*.ec'])
 }
