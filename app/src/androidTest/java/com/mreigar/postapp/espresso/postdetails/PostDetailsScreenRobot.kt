@@ -22,6 +22,14 @@ class PostDetailsScreenRobot {
         assertDisplayed(R.id.postDetailsLayout)
     }
 
+    fun errorIsShown() {
+        assertDisplayed(R.id.postErrorLayout)
+        assertDisplayed(R.id.postErrorLottieView)
+        assertDisplayed(R.id.postErrorTitle, EspressoTestUtils.getText(R.string.error_post_details_title))
+        assertDisplayed(R.id.postErrorBody, EspressoTestUtils.getText(R.string.error_post_details_body))
+        assertDisplayed(R.id.postErrorRefreshButton)
+    }
+
     fun hasCorrectContent(post: Post, user: User, comments: List<Comment>) {
         val postViewModel = PostViewModelMapper().mapToView(post)
         val userViewModel = UserViewModelMapper().mapToView(user)

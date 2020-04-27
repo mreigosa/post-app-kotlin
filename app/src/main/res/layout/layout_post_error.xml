@@ -5,12 +5,12 @@
     tools:layout_width="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/postListEmptyLayout"
+        android:id="@+id/postErrorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/postListLottieView"
+            android:id="@+id/postErrorLottieView"
             android:layout_width="240dp"
             android:layout_height="240dp"
             android:layout_marginStart="50dp"
@@ -22,40 +22,40 @@
             tools:background="@color/colorPrimary" />
 
         <TextView
-            android:id="@+id/postListEmptyTitle"
+            android:id="@+id/postErrorTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/empty_post_list_title"
+            tools:text="Error Title"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/postListLottieView" />
+            app:layout_constraintTop_toBottomOf="@id/postErrorLottieView" />
 
         <TextView
-            android:id="@+id/postListEmptyBody"
+            android:id="@+id/postErrorBody"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="24dp"
             android:gravity="center"
-            android:text="@string/empty_post_list_text"
+            tools:text="Error body"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/postListEmptyTitle" />
+            app:layout_constraintTop_toBottomOf="@id/postErrorTitle" />
 
         <Button
-            android:id="@+id/postListRefreshButton"
+            android:id="@+id/postErrorRefreshButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="@string/button_refresh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/postListEmptyBody" />
+            app:layout_constraintTop_toBottomOf="@id/postErrorBody" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

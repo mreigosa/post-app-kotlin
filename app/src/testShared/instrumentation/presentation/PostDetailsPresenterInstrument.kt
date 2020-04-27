@@ -58,6 +58,10 @@ object PostDetailsPresenterInstrument {
                 callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_ERROR)
             }
 
+            override fun hideError() {
+                callbackResult.putMethodCall(PostDetailsViewMethod.HIDE_ERROR)
+            }
+
             override fun showPostInfo(post: PostViewModel) {
                 callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_POST_INFO)
             }
@@ -88,6 +92,7 @@ enum class PostDetailsViewMethod {
     SHOW_LOADER,
     HIDE_LOADER,
     SHOW_ERROR,
+    HIDE_ERROR,
     SHOW_POST_INFO,
     SHOW_USER_INFO,
     SHOW_COMMENTS,

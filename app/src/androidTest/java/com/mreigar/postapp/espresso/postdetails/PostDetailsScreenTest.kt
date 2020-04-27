@@ -14,6 +14,9 @@ import com.mreigar.presentation.model.PostViewModel
 import instrumentation.data.DataEntityInstrument.givenCommentEntity
 import instrumentation.data.DataEntityInstrument.givenUserEntity
 import instrumentation.domain.DomainEntityInstrument.givenPost
+import instrumentation.localdatasource.DatabaseDataSourceStatus
+import instrumentation.presentation.PresentationEntityInstrument.givenPostViewModel
+import instrumentation.remotedatasource.RemoteDataSourceStatus
 import org.junit.Rule
 import org.junit.Test
 
@@ -80,6 +83,18 @@ class PostDetailsScreenTest : BaseScreenTest() {
                 user = UserMapper().mapFromEntity(user),
                 comments = listOf()
             )
+        }
+    }
+
+    @Test
+    fun given_post_list_activity_when_content_not_received_empty_screen_is_shown() {
+        userRemoteDataSourceStatus = RemoteDataSourceStatus.ERROR
+        userDatabaseDataSourceStatus = DatabaseDataSourceStatus.NO_DATA
+        initState(givenPostViewModel(), listOf(), listOf())
+
+        postDetails {
+            screenIsShown()
+            errorIsShown()
         }
     }
 }

@@ -41,6 +41,11 @@ class PostDetailsPresenter(
         fetchComments()
     }
 
+    fun onRefreshClicked() {
+        view()?.hideError()
+        fetchPostDetails()
+    }
+
     private fun fetchPostDetails() {
         view()?.showLoader()
         invoker.execute(this, getUserByPostUseCase withParams (post.userId)) {
@@ -78,6 +83,7 @@ interface PostDetailsViewTranslator {
     fun showLoader()
     fun hideLoader()
     fun showError()
+    fun hideError()
     fun showPostInfo(post: PostViewModel)
     fun showUserInfo(user: UserViewModel)
     fun showComments(comments: List<CommentViewModel>)
