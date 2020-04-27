@@ -30,6 +30,8 @@ open class BaseScreenTest : PostAppTestRunner() {
 
     protected var userRemoteDataSourceConfiguration = UserRemoteDataSourceConfiguration()
     protected var userDatabaseDataSourceConfiguration = UserDatabaseDataSourceConfiguration()
+    protected var userRemoteDataSourceStatus = RemoteDataSourceStatus.SUCCESS
+    protected var userDatabaseDataSourceStatus = DatabaseDataSourceStatus.SUCCESS
 
     protected var emojiMemoryDataSourceConfiguration = EmojiMemoryDataSourceConfiguration()
     protected var avatarMemoryDataSourceConfiguration = AvatarMemoryDataSourceConfiguration()
@@ -38,8 +40,8 @@ open class BaseScreenTest : PostAppTestRunner() {
         val mockModules = module {
             single(override = true) { givenPostRemoteDataSource(configuration = postRemoteDataSourceConfiguration, status = postRemoteDataSourceStatus) }
             single(override = true) { givenPostDatabaseDataSource(configuration = postDatabaseDataSourceConfiguration, status = postDatabaseDataSourceStatus) }
-            single(override = true) { givenUserRemoteDataSource(configuration = userRemoteDataSourceConfiguration) }
-            single(override = true) { givenUserDatabaseDataSource(configuration = userDatabaseDataSourceConfiguration) }
+            single(override = true) { givenUserRemoteDataSource(configuration = userRemoteDataSourceConfiguration, status = userRemoteDataSourceStatus) }
+            single(override = true) { givenUserDatabaseDataSource(configuration = userDatabaseDataSourceConfiguration, status = userDatabaseDataSourceStatus) }
             single(override = true) { givenEmojiMemoryDataSource(configuration = emojiMemoryDataSourceConfiguration) }
             single(override = true) { givenAvatarMemoryDataSource(configuration = avatarMemoryDataSourceConfiguration) }
         }
