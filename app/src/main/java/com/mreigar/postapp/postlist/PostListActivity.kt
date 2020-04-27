@@ -13,7 +13,7 @@ import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
 import kotlinx.android.synthetic.main.activity_post_list.*
-import kotlinx.android.synthetic.main.layout_empty_post_list.*
+import kotlinx.android.synthetic.main.layout_post_error.*
 
 class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslator {
 
@@ -30,12 +30,19 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
             layoutManager = LinearLayoutManager(this@PostListActivity)
         }
 
-        postListRefreshButton.setOnClickListener { presenter.onRefreshClicked() }
+        postErrorLottieView.apply {
+            setAnimation(R.raw.empty)
+            repeatCount = ValueAnimator.INFINITE
+        }
+
+        postErrorTitle.text = getString(R.string.error_post_list_title)
+        postErrorBody.text = getString(R.string.error_post_list_body)
+        postErrorRefreshButton.setOnClickListener { presenter.onRefreshClicked() }
     }
 
     override fun showLoader() {
         postListLoader.visible()
-        postListEmptyLayout.gone()
+        postErrorLayout.gone()
     }
 
     override fun hideLoader() {
@@ -49,12 +56,8 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
 
     override fun showError() {
         hideLoader()
-        postListLottieView.apply {
-            setAnimation(R.raw.empty)
-            repeatCount = ValueAnimator.INFINITE
-            playAnimation()
-        }
-        postListEmptyLayout.visible()
+        postErrorLottieView.playAnimation()
+        postErrorLayout.visible()
     }
 
     override fun showPostDetails(post: PostViewModel) {
@@ -62,6 +65,6 @@ class PostListActivity : BaseActivity<PostListPresenter>(), PostListViewTranslat
     }
 
     override fun hideError() {
-        postListEmptyLayout.gone()
+        postErrorLayout.gone()
     }
 }

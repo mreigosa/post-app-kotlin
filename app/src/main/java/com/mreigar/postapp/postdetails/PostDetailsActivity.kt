@@ -1,12 +1,12 @@
 package com.mreigar.postapp.postdetails
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.snackbar.Snackbar
 import com.mreigar.postapp.BaseActivity
 import com.mreigar.postapp.R
 import com.mreigar.postapp.extension.gone
@@ -18,6 +18,7 @@ import com.mreigar.presentation.model.UserViewModel
 import com.mreigar.presentation.presenter.PostDetailsPresenter
 import com.mreigar.presentation.presenter.PostDetailsViewTranslator
 import kotlinx.android.synthetic.main.activity_post_details.*
+import kotlinx.android.synthetic.main.layout_post_error.*
 
 class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsViewTranslator {
 
@@ -44,6 +45,15 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
             isNestedScrollingEnabled = false
         }
         postDetailsEmptyCommentsRefresh.setOnClickListener { presenter.onRefreshCommentsClicked() }
+
+        postErrorLottieView.apply {
+            setAnimation(R.raw.empty)
+            repeatCount = ValueAnimator.INFINITE
+        }
+
+        postErrorTitle.text = getString(R.string.error_post_details_title)
+        postErrorBody.text = getString(R.string.error_post_details_body)
+        postErrorRefreshButton.setOnClickListener { presenter.onRefreshClicked() }
     }
 
     override fun getPostFromArgs(): PostViewModel? = (intent.extras?.get(PARAMS_ARG) as? PostViewModel)
@@ -52,6 +62,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
 
     override fun showLoader() {
         postDetailsLoader.visible()
+        postErrorLayout.gone()
     }
 
     override fun hideLoader() {
@@ -60,16 +71,25 @@ class PostDetailsActivity : BaseActivity<PostDetailsPresenter>(), PostDetailsVie
 
     override fun showError() {
         hideLoader()
-        Snackbar.make(findViewById(android.R.id.content), "Error loading post details", Snackbar.LENGTH_LONG).show()
+        postDetailsUserCard.gone()
+        postErrorLottieView.playAnimation()
+        postErrorLayout.visible()
+    }
+
+    override fun hideError() {
+        postErrorLayout.gone()
     }
 
     override fun showPostInfo(post: PostViewModel) {
+        postDetailsTitle.text = post.title
         postDetailsBody.text = post.body
+        postDetailsUserCard.visible()
     }
 
     override fun showUserInfo(user: UserViewModel) {
         postDetailsUserName.text = user.name
         postDetailsUserUsername.text = user.username
+        postDetailsUserEmail.text = user.email
         Glide.with(this)
             .load(user.avatarUrl)
             .apply(RequestOptions.circleCropTransform())

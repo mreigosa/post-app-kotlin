@@ -37,7 +37,6 @@ class PostListPresenter(
 
     fun onRefreshClicked() {
         view()?.hideError()
-        view()?.showLoader()
         fetchPosts()
     }
 }

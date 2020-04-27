@@ -32,34 +32,54 @@
                     tools:tint="@color/colorAccent" />
 
                 <TextView
-                    android:id="@+id/postDetailsUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_toEndOf="@id/postDetailsUserAvatar"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="User Name" />
-
-                <TextView
                     android:id="@+id/postDetailsUserUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/postDetailsUserName"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_toEndOf="@id/postDetailsUserAvatar"
                     android:textSize="12sp"
                     tools:text="username" />
 
                 <TextView
-                    android:id="@+id/postDetailsBody"
+                    android:id="@+id/postDetailsUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/postDetailsUserAvatar"
+                    android:layout_below="@id/postDetailsUserUsername"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="User Name" />
+
+                <TextView
+                    android:id="@+id/postDetailsUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/postDetailsUserName"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/postDetailsUserAvatar"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    tools:text="username@mail.com" />
+
+                <TextView
+                    android:id="@+id/postDetailsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/postDetailsUserAvatar"
                     android:layout_marginTop="@dimen/margin_regular"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="post title" />
+
+                <TextView
+                    android:id="@+id/postDetailsBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/postDetailsTitle"
                     android:textSize="12sp"
                     tools:text="post body goes here" />
             </RelativeLayout>
@@ -118,6 +138,8 @@
             android:layout_marginTop="@dimen/margin_regular"
             android:text="@string/button_refresh"
             android:visibility="gone" />
+
+        <include layout="@layout/layout_post_error" />
     </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>
