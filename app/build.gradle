@@ -42,14 +42,13 @@ android {
         release {
             // Load keystore
             Properties properties = new Properties()
-            def keystorePropertiesFile = file("keystore.properties")
-            if (keystorePropertiesFile.exists()) {
-                properties.load(new FileInputStream(keystorePropertiesFile))
-            } else {
+            if (System.getenv('KEY_PATH') != null) {
                 properties.setProperty('STORE_FILE', System.getenv('KEY_PATH'))
                 properties.setProperty('STORE_PASS', System.getenv('KEY_STORE_PASSWORD'))
                 properties.setProperty('KEY_ALIAS', System.getenv('ALIAS'))
                 properties.setProperty('KEY_PASS', System.getenv('KEY_PASSWORD'))
+            } else {
+                properties.load(new FileInputStream("$projectDir/keystores/prodtest/prodtest.properties"))
             }
 
             storeFile file(properties['STORE_FILE'])
