@@ -16,6 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/layout_post_item" />
 
+    <include layout="@layout/layout_post_error" />
+
     <ProgressBar
         android:id="@+id/postListLoader"
         android:layout_width="50dp"

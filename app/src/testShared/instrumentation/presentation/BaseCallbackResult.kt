@@ -22,6 +22,8 @@ abstract class BaseCallbackResult<T> {
     fun getParams(methodName: T): Any = firedMethods.first {
         it.method == methodName
     }.params
+
+    fun clearFiredMethods() = firedMethods.clear()
 }
 
 data class FiredMethod<T>(

@@ -5,6 +5,7 @@ import com.mreigar.presentation.model.PostViewModel
 import com.mreigar.presentation.presenter.PostListPresenter
 import com.mreigar.presentation.presenter.PostListViewTranslator
 import instrumentation.data.RepositoryStatus
+import instrumentation.domain.InvokerInstruments
 import instrumentation.domain.usecase.GetPostsUseCaseInstrument
 
 object PostListPresenterInstrument {
@@ -15,7 +16,8 @@ object PostListPresenterInstrument {
         postList: List<Post>? = null
     ) = PostListPresenter(
         givenPostListViewTranslator(callbackResult),
-        givenGetPostsUseCase(getPostsIsSuccess, postList)
+        givenGetPostsUseCase(getPostsIsSuccess, postList),
+        InvokerInstruments.givenAnInvoker()
     )
 
     private fun givenGetPostsUseCase(getPostsIsSuccess: Boolean, postList: List<Post>?) =
@@ -44,6 +46,10 @@ object PostListPresenterInstrument {
         override fun showPostDetails(post: PostViewModel) {
             callbackResult.putMethodCall(PostListViewMethod.SHOW_POST_DETAILS, post)
         }
+
+        override fun hideError() {
+            callbackResult.putMethodCall(PostListViewMethod.HIDE_ERROR)
+        }
     }
 }
 
@@ -54,5 +60,6 @@ enum class PostListViewMethod {
     HIDE_LOADER,
     SHOW_DATA,
     SHOW_ERROR,
-    SHOW_POST_DETAILS
+    SHOW_POST_DETAILS,
+    HIDE_ERROR
 }

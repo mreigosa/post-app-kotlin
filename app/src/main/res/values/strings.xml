@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Post App</string>
     <string name="comment_list_header">Comments (%s)</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="error_post_list_title">No posts found</string>
+    <string name="error_post_list_body">Sorry! We didn\'t find posts to show. You can refresh or try again later</string>
+    <string name="error_post_details_title">Ooops!</string>
+    <string name="error_post_details_body">Sorry! We couldn\'t retrieve the details. You can refresh or try again later</string>
+    <string name="empty_comment_list_text">No comments found.</string>
 </resources>

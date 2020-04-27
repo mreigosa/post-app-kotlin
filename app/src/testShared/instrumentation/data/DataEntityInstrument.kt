@@ -11,11 +11,11 @@ object DataEntityInstrument {
 
     fun givenPostEntity(id: Int = 1, userId: Int = 1) = PostEntity(id = id, userId = userId, title = "title", body = "body")
 
-    fun givenCommentEntity(id: Int = 1, postId: Int = 1) = CommentEntity(id, postId, "name", "name@mail.com", "body")
+    fun givenCommentEntity(id: Int = 1, postId: Int = 1, email: String = "name@mail.com") = CommentEntity(id, postId, "name", email, "body")
 
     fun givenUserEntity(userId: Int = 1) = UserEntity(userId, "name", "username", "name@mail.com")
 
-    fun givenEmailEmojiEntity(pattern: EmailPattern = EmailPattern.INFO, emojis: String = "fake-emojis") = EmailEmojiEntity(pattern, emojis)
+    fun givenEmailEmojiEntity(pattern: EmailPattern = EmailPattern.INFO, emojis: String = "\uD83D\uDD25") = EmailEmojiEntity(pattern, emojis)
 
     fun givenPostEntityList(size: Int): List<PostEntity> {
         val list: MutableList<PostEntity> = LinkedList<PostEntity>()
@@ -26,10 +26,10 @@ object DataEntityInstrument {
         return list
     }
 
-    fun givenCommentEntityList(size: Int): List<CommentEntity> {
+    fun givenCommentEntityList(size: Int, postId: Int? = null): List<CommentEntity> {
         val list: MutableList<CommentEntity> = LinkedList<CommentEntity>()
         for (i in 0 until size) {
-            list.add(CommentEntity(i, i, "name$i", "email&i", "body$i"))
+            list.add(CommentEntity(i, postId ?: i, "name$i", "email&i", "body$i"))
         }
 
         return list

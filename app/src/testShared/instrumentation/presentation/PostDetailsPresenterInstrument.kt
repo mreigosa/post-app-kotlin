@@ -8,6 +8,7 @@ import com.mreigar.presentation.model.UserViewModel
 import com.mreigar.presentation.presenter.PostDetailsPresenter
 import com.mreigar.presentation.presenter.PostDetailsViewTranslator
 import instrumentation.data.RepositoryStatus
+import instrumentation.domain.InvokerInstruments
 import instrumentation.domain.usecase.GetCommentsByPostUseCaseInstrument.givenGetCommentsByPostUseCase
 import instrumentation.domain.usecase.GetUserByPostUseCaseInstrument.givenGetUserByPostUseCase
 import instrumentation.presentation.PresentationEntityInstrument.givenPostViewModel
@@ -30,7 +31,8 @@ object PostDetailsPresenterInstrument {
         givenGetCommentsByPostUseCase(
             repositoryStatus = if (getCommentsIsSuccess) RepositoryStatus.SUCCESS else RepositoryStatus.ERROR,
             commentList = commentList
-        )
+        ),
+        InvokerInstruments.givenAnInvoker()
     )
 
     private fun givenPostDetailsViewTranslator(callbackResult: PostDetailsCallbackResult, post: PostViewModel?) =
@@ -56,6 +58,10 @@ object PostDetailsPresenterInstrument {
                 callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_ERROR)
             }
 
+            override fun hideError() {
+                callbackResult.putMethodCall(PostDetailsViewMethod.HIDE_ERROR)
+            }
+
             override fun showPostInfo(post: PostViewModel) {
                 callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_POST_INFO)
             }
@@ -66,6 +72,14 @@ object PostDetailsPresenterInstrument {
 
             override fun showComments(comments: List<CommentViewModel>) {
                 callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_COMMENTS)
+            }
+
+            override fun showCommentsError() {
+                callbackResult.putMethodCall(PostDetailsViewMethod.SHOW_COMMENTS_ERROR)
+            }
+
+            override fun hideCommentsError() {
+                callbackResult.putMethodCall(PostDetailsViewMethod.HIDE_COMMENTS_ERROR)
             }
         }
 }
@@ -78,7 +92,10 @@ enum class PostDetailsViewMethod {
     SHOW_LOADER,
     HIDE_LOADER,
     SHOW_ERROR,
+    HIDE_ERROR,
     SHOW_POST_INFO,
     SHOW_USER_INFO,
-    SHOW_COMMENTS
+    SHOW_COMMENTS,
+    SHOW_COMMENTS_ERROR,
+    HIDE_COMMENTS_ERROR
 }

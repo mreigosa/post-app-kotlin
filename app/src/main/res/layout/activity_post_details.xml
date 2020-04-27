@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/postDetailsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/card_bg_color">
@@ -31,34 +32,54 @@
                     tools:tint="@color/colorAccent" />
 
                 <TextView
-                    android:id="@+id/postDetailsUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_toEndOf="@id/postDetailsUserAvatar"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="User Name" />
-
-                <TextView
                     android:id="@+id/postDetailsUserUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/postDetailsUserName"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_toEndOf="@id/postDetailsUserAvatar"
                     android:textSize="12sp"
                     tools:text="username" />
 
                 <TextView
-                    android:id="@+id/postDetailsBody"
+                    android:id="@+id/postDetailsUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/postDetailsUserAvatar"
+                    android:layout_below="@id/postDetailsUserUsername"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="User Name" />
+
+                <TextView
+                    android:id="@+id/postDetailsUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/postDetailsUserName"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/postDetailsUserAvatar"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    tools:text="username@mail.com" />
+
+                <TextView
+                    android:id="@+id/postDetailsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/postDetailsUserAvatar"
                     android:layout_marginTop="@dimen/margin_regular"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="post title" />
+
+                <TextView
+                    android:id="@+id/postDetailsBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/postDetailsTitle"
                     android:textSize="12sp"
                     tools:text="post body goes here" />
             </RelativeLayout>
@@ -93,6 +114,32 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/postDetailsCommentsTitleContainer"
             tools:listitem="@layout/layout_comment_item" />
+
+        <TextView
+            android:id="@+id/postDetailsEmptyCommentsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postDetailsCommentsTitleContainer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/margin_regular"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/margin_regular"
+            android:gravity="center"
+            android:text="@string/empty_comment_list_text"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/postDetailsEmptyCommentsRefresh"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postDetailsEmptyCommentsText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_regular"
+            android:text="@string/button_refresh"
+            android:visibility="gone" />
+
+        <include layout="@layout/layout_post_error" />
     </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

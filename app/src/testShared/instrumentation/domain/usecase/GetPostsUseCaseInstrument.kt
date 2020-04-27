@@ -13,7 +13,6 @@ object GetPostsUseCaseInstrument {
         repositoryStatus: RepositoryStatus,
         postList: List<Post>? = null
     ) = GetPostsUseCase(
-        givenPostRepository(status = repositoryStatus, postList = postList),
-        TestContextProvider()
+        givenPostRepository(status = repositoryStatus, postList = postList)
     )
 }
