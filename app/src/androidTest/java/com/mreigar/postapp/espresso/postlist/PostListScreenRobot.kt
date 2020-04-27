@@ -2,6 +2,7 @@ package com.mreigar.postapp.espresso.postlist
 
 import com.mreigar.domain.model.Post
 import com.mreigar.postapp.R
+import com.mreigar.postapp.espresso.utils.EspressoTestUtils
 import com.mreigar.presentation.mapper.PostViewModelMapper
 import com.schibsted.spain.barista.assertion.BaristaListAssertions.assertDisplayedAtPosition
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
@@ -19,11 +20,11 @@ class PostListScreenRobot {
     }
 
     fun errorIsShown() {
-        assertDisplayed(R.id.postListEmptyLayout)
-        assertDisplayed(R.id.postListLottieView)
-        assertDisplayed(R.id.postListEmptyTitle)
-        assertDisplayed(R.id.postListEmptyBody)
-        assertDisplayed(R.id.postListRefreshButton)
+        assertDisplayed(R.id.postErrorLayout)
+        assertDisplayed(R.id.postErrorLottieView)
+        assertDisplayed(R.id.postErrorTitle, EspressoTestUtils.getText(R.string.error_post_list_title))
+        assertDisplayed(R.id.postErrorBody, EspressoTestUtils.getText(R.string.error_post_list_body))
+        assertDisplayed(R.id.postErrorRefreshButton)
     }
 
     fun hasCorrectContent(postList: List<Post>) {

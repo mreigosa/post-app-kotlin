@@ -41,10 +41,6 @@ class PostListScreenTest : BaseScreenTest() {
         userDatabaseDataSourceConfiguration = UserDatabaseDataSourceConfiguration(
             userEntity = user
         )
-
-        //postRemoteDataSourceStatus = postRemoteDataSourceStatus
-        //postDatabaseDataSourceStatus =
-
         activityRule.launchActivity(null)
     }
 
