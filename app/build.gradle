@@ -38,14 +38,6 @@ android {
         }
     }
 
-//    signingConfigs {
-//        config {
-//            storeFile file('/Users/martin.reigosa/keystores/android2.jks')
-//            storePassword 'keystore_pass'
-//            keyAlias 'key0'
-//            keyPassword 'secure_P@ss1234'
-//        }
-
     signingConfigs {
         release {
             // Load keystore
