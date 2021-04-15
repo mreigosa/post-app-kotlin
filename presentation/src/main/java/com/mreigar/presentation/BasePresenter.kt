@@ -39,6 +39,7 @@ abstract class BasePresenter<out T>(
 
     override fun onDestroy() {
         job.cancel()
+        view.clear()
     }
 
     override fun onRestoreInstanceState() {}

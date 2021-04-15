@@ -11,14 +11,18 @@ class UseCaseInvoker(
     private val idleNotifier: IdleNotifier? = null
 ) : Invoker {
 
-    override fun <P : Any, T> execute(scope: CoroutineScope, useCase: UseCase<P, T>, callback: ((Result<T>) -> Unit)?) {
+    override fun <P : Any, T> execute(
+        scope: CoroutineScope,
+        useCase: UseCase<P, T>,
+        callback: ((Result<T>) -> Unit)?
+    ) {
         idleNotifier?.increment()
         scope.launch(dispatcherProvider.main) {
             try {
                 val result = withContext(dispatcherProvider.background) { useCase.run() }
                 callback?.invoke(result)
             } catch (e: Exception) {
-                Error(e)
+                callback?.invoke(Error(e))
             } finally {
                 idleNotifier?.decrement()
             }
