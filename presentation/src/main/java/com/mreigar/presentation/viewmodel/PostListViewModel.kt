@@ -9,11 +9,10 @@ import com.mreigar.domain.executor.Success
 import com.mreigar.domain.executor.usecase.GetPostsUseCase
 import com.mreigar.domain.model.Post
 import com.mreigar.presentation.mapper.PostViewModelMapper
-import com.mreigar.presentation.model.PostViewModel
 
 class PostListViewModel(
-    private val getPostsUseCase: GetPostsUseCase,
-    private val invoker: Invoker
+        private val getPostsUseCase: GetPostsUseCase,
+        private val invoker: Invoker
 ) : ViewModel() {
 
     private val mapper: PostViewModelMapper = PostViewModelMapper()
@@ -21,7 +20,7 @@ class PostListViewModel(
     private val _postListViewState = MutableLiveData<PostListViewState>()
     val postListViewState: LiveData<PostListViewState> = _postListViewState
 
-    fun onDataRequested(){
+    fun onDataRequested() {
         fetchPosts()
     }
 
