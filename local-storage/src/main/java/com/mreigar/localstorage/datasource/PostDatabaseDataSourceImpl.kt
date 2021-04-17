@@ -6,8 +6,8 @@ import com.mreigar.data.model.PostEntity
 import com.mreigar.localstorage.database.AppDatabase
 import com.mreigar.localstorage.mapper.CommentDatabaseEntityMapper
 import com.mreigar.localstorage.mapper.PostDatabaseEntityMapper
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class PostDatabaseDataSourceImpl : PostDatabaseDataSourceContract, KoinComponent {
 

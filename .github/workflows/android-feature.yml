@@ -20,8 +20,3 @@ jobs:
 
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
-        env:
-          KEY_PATH: ${{ secrets.STORE_FILE }}
-          KEY_STORE_PASSWORD: ${{ secrets.STORE_PASS }}
-          ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASS }}

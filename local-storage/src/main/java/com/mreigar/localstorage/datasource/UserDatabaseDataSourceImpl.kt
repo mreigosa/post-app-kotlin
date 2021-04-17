@@ -4,8 +4,8 @@ import com.mreigar.data.datasource.UserDatabaseDataSourceContract
 import com.mreigar.data.model.UserEntity
 import com.mreigar.localstorage.database.AppDatabase
 import com.mreigar.localstorage.mapper.UserDatabaseEntityMapper
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class UserDatabaseDataSourceImpl : UserDatabaseDataSourceContract, KoinComponent {
 
